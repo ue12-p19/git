@@ -122,7 +122,7 @@ git commit -m "deux fichiers de plus"
 show-repo
 
 sed -i -e s',line2 of file1,line2 modified in file1,' file1
-rm file1-e
+rm -f file1-e
 
 # ici git status me montre que j'ai 
 # (*) le fichier file1 modifié 
