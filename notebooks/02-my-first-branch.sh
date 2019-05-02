@@ -17,5 +17,3 @@ pwd
 show-repo
 
 git ls-tree HEAD
-
-
