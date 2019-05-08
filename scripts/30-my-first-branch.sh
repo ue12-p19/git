@@ -8,7 +8,7 @@
 # pour cela enlever le premier caractère '#' 
 # et évaluer la cellule
 
-# bash 20-my-first-repo.sh >& /dev/null
+# bash scripts/20-my-first-repo.sh >& /dev/null
 
 # si nécessaire, on se place dans le repo git
 [ -d my-first-repo ] && cd my-first-repo
@@ -25,7 +25,3 @@ show-repo
 ls
 
 show-repo --all
-
-
-
-git ls-tree HEAD

@@ -4,15 +4,17 @@ NORMALIZE_OPTIONS = --author "Thierry Parmentelat" --logo-path media/inria-25-al
 
 
 NOTEBOOKS := $(shell git ls-files *.ipynb)
-SHELLS = $(subst .ipynb,.sh,$(NOTEBOOKS))
+SHELLS = $(foreach nb,$(subst .ipynb,.sh,$(NOTEBOOKS)),../scripts/$(nb))
 
-all: norm conv
-
-%.sh: %.ipynb
-	jupyter nbconvert --to script $*
-
-conv: $(SHELLS)
+all: norm shell
 
 norm:
 	$(NORMALIZE) $(NORMALIZE_OPTIONS) $(NOTEBOOKS)
 
+shell: $(SHELLS)
+
+../scripts/%.sh: %.ipynb
+	jupyter nbconvert --to script $* && mv -f $*.sh ../scripts
+
+foo:
+	echo SHELLS=$(SHELLS)
