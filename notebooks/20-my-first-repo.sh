@@ -2,6 +2,7 @@
 # ce sera toujours notre façon de commencer
 [ -f scripts/helpers.sh ] && source scripts/helpers.sh; standard-start
 
+# en particulier pour savoir la version de `git` qui est installée
 git version
 
 # je détruis
@@ -11,6 +12,7 @@ rm -rf my-first-repo
 mkdir my-first-repo
 
 # on va dedans
+
 cd my-first-repo
 
 ls -a
@@ -22,7 +24,7 @@ ls -aF
 # malgré la présence de ce directory .git
 # si on demande la liste des fichiers 'normaux' 
 # on voit un répertoire vide
-ls
+ls 
 
 git log
 
@@ -36,9 +38,11 @@ EOF
 # voyons ce fichier
 cat README.md
 
+git status
+
 git add README.md
 
-git commit -m 'mon premier commit'
+git commit -m 'my first commit: added README.md'
 
 git log
 
@@ -67,12 +71,10 @@ rm -f README.md-e
 # nous y reviendrons
 git status
 
-# dans l'immédiat je veux ajouter le changement lié à l'orthographe
-# dans le prochain commit
-
 git diff README.md
 
 # c'est bien ce que je voulais faire
+# donc je peux ajouter tout le fichier 
 git add README.md
 
 # regardons à nouveau git status
@@ -80,7 +82,7 @@ git add README.md
 git status
 
 # tous les changements montrés EN VERT vont faire partie du prochain commit
-git commit -m "nouveau fichier LICENSE, une correction dans README.md"
+git commit -m "added LICENSE, changed README.md"
 
 git log
 
@@ -103,7 +105,7 @@ show-repo
 git status
 
 # on crée trois fichiers; les détails importent peu
-../scripts/populate create-three-files
+../scripts/populate.sh create-three-files
 
 # leur contenu
 cat file1    
@@ -117,7 +119,7 @@ git ls-files
 ls -1F
 
 git add file1 file2
-git commit -m "deux fichiers de plus"
+git commit -m "new files file1 and file2"
 
 show-repo
 
@@ -137,7 +139,7 @@ git add file1 file3
 # du coup tout est en vert
 git status
 
-git commit -m "quatrième commit, avec 5 fichiers"
+git commit -m "added file3, we now have 5 files"
 
 show-repo
 
@@ -152,11 +154,6 @@ function show-repo() { git log --oneline --graph "$@"; }
 
 show-repo HEAD^^^
 
-# d'une part, les fichiers présents dans le répertoire de travail
 ls -l
 
-# et d'autre part, le contenu des commits
 git ls-tree HEAD
-
-# ainsi je peux regarder le contenu d'un commit précédent
-git ls-tree HEAD~3

@@ -1,4 +1,4 @@
-function show-repo() { git log --oneline --graph; }
+function show-repo() { git log --oneline --graph "$@"; }
 
 
 function standard-start() {

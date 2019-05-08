@@ -13,5 +13,10 @@ pwd
 # ces deux réglages pour git sont nécessaires
 # 
 # ça se lit comme ceci: si user.name est indéfini, alors on lui donne la chaine "Jeanne Durand"
+
 git config user.name  || git config --global user.name "Jeanne Durand"
 git config user.email || git config --global user.email "jeanne.durand@example.org"
+
+# vérifions le réglage en vigueur
+git config user.name
+git config user.email
