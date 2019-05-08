@@ -28,13 +28,4 @@ show-repo --all
 
 
 
-
-
 git ls-tree HEAD
-
-ls ../../figures
-
-%%html
-<img src="figures/notebook1.svg">
-
-

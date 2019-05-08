@@ -1,12 +1,12 @@
 const defaultTemplate = 
     GitgraphJS.templateExtend("metro", {
-        colors: ["#80a0c0", "gray", "orange"],
+        colors: ["navy", "gray", "orange"],
         arrow: {
             size: 0,
         },
         branch: {
             label: {
-            font: "normal 20pt Quicksand",
+            font: "normal 16pt Quicksand",
             display: true,
             strokeColor: "black",
         },
@@ -16,7 +16,7 @@ const defaultTemplate =
             dot: {
                 size: 12,
             },
-            spacing: 50,
+            spacing: 40,
             message: {
                 displayAuthor: false,
                 displayHash: false,
