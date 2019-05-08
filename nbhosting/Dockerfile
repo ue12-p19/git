@@ -7,7 +7,7 @@ RUN jupyter nbextension enable splitcell/splitcell
 RUN pip install rise && jupyter-nbextension install rise --py && jupyter-nbextension enable rise --py
 
 # configure git 
-RUN git config --global user.email "notebook.user@example.org" && config --global user.name "Notebook User"
+RUN git config --global user.email "notebook.user@example.org" && git config --global user.name "Notebook User"
 
 # not quite sure yet which is best, let's ship both for now
 
