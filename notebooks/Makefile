@@ -1,5 +1,5 @@
 NORMALIZE = ../../flotpython-tools/tools/nbnorm.py
-NORMALIZE_OPTIONS = --author "Thierry Parmentelat" --logo-path media/inria-25-alpha.png
+NORMALIZE_OPTIONS = --author "Thierry Parmentelat" --logo-path media/inria-25-alpha.png --rise
 
 
 
