@@ -1,18 +1,21 @@
 const defaultTemplate = 
     GitgraphJS.templateExtend("metro", {
-        colors: ["navy", "gray", "orange"],
+        colors: ["navy", "green", "orange"],
         arrow: {
             size: 0,
         },
         branch: {
+            color: "#808080",
+            lineWidth: 7,
             label: {
-            font: "normal 16pt Quicksand",
-            display: true,
-            strokeColor: "black",
-        },
-        lineWidth: 7,
+                font: "normal 16pt ubuntu",
+                display: true,
+                strokeColor: "#c0c0c0",
+                borderRadius: 6,
+            },
         },
         commit: {
+            color: "green",
             dot: {
                 size: 12,
             },
@@ -20,7 +23,7 @@ const defaultTemplate =
             message: {
                 displayAuthor: false,
                 displayHash: false,
-                font: "normal 20pt Quicksand",
+                font: "normal 16pt Monaco",
             },
         },
     });
