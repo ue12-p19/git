@@ -14,7 +14,7 @@ norm:
 shell: $(SHELLS)
 
 ../scripts/%.sh: %.ipynb
-	jupyter nbconvert --to script $* && mv -f $*.sh ../scripts
+	jupyter nbconvert --to script $* && mv -f $*.sh ../scripts && chmod +x ../scripts/$*.sh
 
 foo:
 	echo SHELLS=$(SHELLS)

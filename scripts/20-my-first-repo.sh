@@ -31,7 +31,7 @@ git log
 cat > README.md << EOF
 # lisez-moi
 
-Ce répository sert à ilustrer 
+Ce dépôt sert à ilustrer 
 notre cours sur **git**
 EOF
 
@@ -118,8 +118,9 @@ git ls-files
 
 ls -1F
 
-git add file1 file2
-git commit -m "new files file1 and file2"
+echo 'commit #3' >> README.md
+git add README.md file1 file2
+git commit -m "new files file1 and file2, tweak README"
 
 show-repo
 

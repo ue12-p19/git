@@ -16,4 +16,10 @@ function create-three-files() {
     create-files 1 3
 }
 
+function do-both-kinds-of-changes() {
+    echo "δ2: une ligne dans l'index" >> README.md
+    git add README.md
+    echo "δ1: pas dans l'index" >> README.md
+}
+
 "$@"
