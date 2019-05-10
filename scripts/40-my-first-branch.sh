@@ -20,6 +20,55 @@ pwd
 # et être sur la branche devel
 show-repo --all
 
+# pour voir la liste des branches
+
+git branch
+
+# -1 : équivalent à git log -n 1 
+# ou encore git log --max-count 1
+git log --oneline -1 HEAD
+
+# pour créer une branche: donner juste un nom et un commit
+
+git branch foobar HEAD^
+
+show-repo --all
+
+# pour renommer une branche 
+# (même la branche courante d'ailleurs)
+
+git branch -m foobar trucmuche
+
+show-repo --all
+
+# pour détruire une branche
+
+git branch -d trucmuche
+
+show-repo --all
+
+
+# la branche courante est devel
+# du coup si on crée un commit maintenant
+
+echo "dans la branche devel" >> README.md
+git add README.md
+git commit -m "le début de la branche devel"
+
+show-repo --all
+
+ls
+
+git checkout master
+
+ls
+
+git checkout devel
+
+ls
+
+git diff master devel
+
 # les fichiers dans l'index,
 # i.e. dans le prochain commit 
 # si on le faisait maintenant
