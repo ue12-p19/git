@@ -14,3 +14,5 @@ RUN git config --global user.email "notebook.user@example.org" && git config --g
 RUN pip install bash_kernel && python -m bash_kernel.install
 
 RUN pip install metakernel_bash && python -m metakernel_bash install
+
+RUN pip install ipywidgets && jupyter nbextension enable --py widgetsnbextension
