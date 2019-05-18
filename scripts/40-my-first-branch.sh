@@ -21,14 +21,17 @@ pwd
 show-repo --all
 
 # pour voir la liste des branches
+# met la branche courante en relief
 
 git branch
 
-# -1 : équivalent à git log -n 1 
-# ou encore git log --max-count 1
+# git log -1 : pour ne voir que un commit
 git log --oneline -1 HEAD
 
-# pour créer une branche: donner juste un nom et un commit
+show-repo --all
+
+# pour créer une branche
+# donner juste un nom et un commit
 
 git branch foobar HEAD^
 
@@ -49,10 +52,11 @@ show-repo --all
 
 
 # la branche courante est devel
-# du coup si on crée un commit maintenant
+# du coup si on crée un commit
+# maintenant:
 
-echo "dans la branche devel" >> README.md
-git add README.md
+echo "dans la branche devel" >> LICENSE
+git add LICENSE
 git commit -m "le début de la branche devel"
 
 show-repo --all
@@ -68,6 +72,72 @@ git checkout devel
 ls
 
 git diff master devel
+
+# on se met dans la branche master
+git checkout master
+
+# on vérifie
+git branch
+
+# ce merge va créer un commit
+# il me faut donc donner un message
+git merge devel -m "mon premier merge"
+
+# remarquez le nouveau commit
+show-repo
+
+show-repo
+
+show-repo -1 master^
+
+show-repo -1 master~2
+
+show-repo
+
+show-repo -1 master^
+
+show-repo -1 master^2
+
+show-repo 
+
+# première à droite, puis on descend
+show-repo -1 master^2^
+
+# c'est donc comme si j'était descendu 3 fois
+show-repo -1 master~3
+
+show-repo --all
+
+# l'endroit de la 'fourche' c'est
+git merge-base master^ master^2
+
+fork=$(git merge-base master^ master^2)
+echo $fork
+
+# on va se définir des raccourcis
+# pour désigner les 4 points importants
+
+left="master^"
+
+right="master^2"
+
+show-repo -1 master
+
+show-repo -1 $left
+
+show-repo -1 $right
+
+show-repo -1 $fork
+
+git diff $right master
+
+git diff $fork $left
+
+git diff $left master
+
+git diff $fork $right
+
+xxx
 
 # les fichiers dans l'index,
 # i.e. dans le prochain commit 

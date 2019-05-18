@@ -27,6 +27,8 @@ show-repo
 
 show-repo --all
 
+# quand on change de branche
+# les fichiers sur le disque changent aussi !
 ls
 
 # de très nombreuses options disponibles
@@ -36,37 +38,59 @@ git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(re
 # avec --all
 git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 
+# le contenu d'un commit
 git ls-tree --abbrev HEAD
 
+# un autre commit
 git ls-tree --abbrev master
 
 # git status donne une synthèse
 
+# dans le cas général il va nous montrer 
+# (*) le nom de la branche courante
+# (*) les deux sortes de différences
+# (*) et aussi le cas échéant les fichiers
+#     qui sont présents mais pas dans le commit
+
+# mais pour l'instant il n'y a pas grand chose à voir
 git status
 
 # je mets un changement dans l'index
-echo "une ligne dans l'index" >> README.md
+echo "δ2: une ligne dans l'index" >> README.md
 git add README.md
 
 # je fais un autre changement 
 # mais pas dans l'index
-echo "pas dans l'index" >> README.md
+echo "δ1: pas dans l'index" >> README.md
+
+# voici ce que ça donne quand on a des changements 
 
 git status
 
 # par défaut git diff montre les diffs
 # entre l'espace de travail et l'index
+
 git diff
 
 # pour voir ce qui est dans l'index
 
 git diff --cached
 
+# juste pour ce tuto:
+# 
+# un raccourci pour bien montrer 
+# LES DEUX différences:
+# fichiers / index 
+# et
+# index / commit
+
 type show-diffs
 
 show-diffs
 
-# pour revenir à l'état du dernier commit
+# j'avais deux différences (une dans l'index et l'autre non)
+
+# avec cette commande je vais revenir à l'état du dernier commit
 
 git reset --hard
 

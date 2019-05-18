@@ -104,43 +104,46 @@ show-repo
 
 git status
 
-# on crée trois fichiers; les détails importent peu
-../scripts/populate.sh create-three-files
+# on crée deux fichiers; les détails importent peu
+../scripts/populate.sh create-two-files
 
 # leur contenu
 cat file1    
 
 cat file2  
 
-cat file3
-
 git ls-files
 
 ls -1F
 
+# un changement dans README.md
 echo 'commit #3' >> README.md
-git add README.md file1 file2
-git commit -m "new files file1 and file2, tweak README"
+
+# je prépare le commit 
+git add README.md file1 
+
+# je fais le commit
+git commit -m "new file file1, tweak README"
 
 show-repo
 
-sed -i -e s',line2 of file1,line2 modified in file1,' file1
-rm -f file1-e
+# un changement dans README.md
+echo 'commit #4' >> README.md
 
 # ici git status me montre que j'ai 
-# (*) le fichier file1 modifié 
-# (*) le fichier file3 qui n'est pas dans le repo
+# (*) le fichier README.md modifié 
+# (*) le fichier file2 qui n'est pas dans le repo
 git status
 
 # si j'ajoute les deux fichiers file1 et file3
 # je prépare un commit qui contient 
 # tout ce qu'il y a dans mon répertoire de travail
-git add file1 file3
+git add README.md file2
 
 # du coup tout est en vert
 git status
 
-git commit -m "added file3, we now have 5 files"
+git commit -m "adding file2, we now have 4 files"
 
 show-repo
 

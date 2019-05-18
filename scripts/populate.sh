@@ -1,19 +1,16 @@
 #!/bin/bash
 
-function create-files() {
-    local from=$1; shift
-    local until=$1; shift
-    for file in $(seq $from $until); do
-        for line in $(seq $((file + 2))); do
-            echo line$line of file$file >> file$file
-        done
-#        git add file$file
-#        git commit -m "création de file$file"
+function create-file() {
+    local name=$1; shift
+    local lines=$1; shift
+    for line in $(seq $lines); do
+        echo line$line of $name >> $name
     done
 }
 
-function create-three-files() {
-    create-files 1 3
+function create-two-files() {
+    create-file file1 2
+    create-file file2 3
 }
 
 function do-both-kinds-of-changes() {
