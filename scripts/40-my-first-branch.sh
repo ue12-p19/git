@@ -83,7 +83,8 @@ git branch
 # il me faut donc donner un message
 git merge devel -m "mon premier merge"
 
-# remarquez le nouveau commit
+# remarquez le nouveau commit qui est bien sûr
+# créé dans la branche courante
 show-repo
 
 show-repo
@@ -129,7 +130,9 @@ show-repo -1 $right
 
 show-repo -1 $fork
 
-git diff $right master
+
+git diff $
+right master
 
 git diff $fork $left
 
