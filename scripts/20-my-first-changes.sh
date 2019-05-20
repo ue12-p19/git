@@ -3,12 +3,12 @@
 [ -f scripts/helpers.sh ] && source scripts/helpers.sh
 
 # si nécessaire, vous pouvez remettre le repository 
-# dans l'état où il est après le notebook 20-my-first-repo
+# dans l'état où il est après le notebook 10-my-first-repo
 # 
 # pour cela enlever le premier caractère '#' 
 # et évaluer la cellule
 
-# bash $TOPLEVEL/scripts/20-my-first-repo.sh >& /dev/null
+# bash $TOPLEVEL/scripts/10-my-first-repo.sh >& /dev/null
 
 # si nécessaire, on se place dans le repo git
 [ -d my-first-repo ] && cd my-first-repo
