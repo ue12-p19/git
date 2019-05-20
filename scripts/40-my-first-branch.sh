@@ -1,6 +1,6 @@
 
 # ce sera toujours notre façon de commencer
-[ -f scripts/helpers.sh ] && source scripts/helpers.sh; standard-start
+[ -f scripts/helpers.sh ] && source scripts/helpers.sh
 
 # si nécessaire, vous pouvez remettre le repository 
 # dans l'état où il est après le notebook 20-my-first-repo
@@ -8,8 +8,8 @@
 # pour cela enlever le premier caractère '#' 
 # et évaluer la cellule
 
-# bash scripts/20-my-first-repo.sh >& /dev/null
-# bash scripts/30-my-first-changes.sh >& /dev/null
+# bash $TOPLEVEL/scripts/20-my-first-repo.sh
+# bash $TOPLEVEL/scripts/30-my-first-changes.sh 
 
 # si nécessaire, on se place dans le repo git
 [ -d my-first-repo ] && cd my-first-repo
@@ -79,11 +79,16 @@ git checkout master
 # on vérifie
 git branch
 
-# ce merge va créer un commit
-# il me faut donc donner un message
+# ce merge va créer un commit, donc:
+
+# - il sera créé sur la branche courante
+# ici master
+# -  il me faut donner un message
 git merge devel -m "mon premier merge"
 
-# remarquez le nouveau commit qui est bien sûr
+
+# remarquez le nouveau commit 
+# qui est bien sûr
 # créé dans la branche courante
 show-repo
 
@@ -140,7 +145,8 @@ git diff $left master
 
 git diff $fork $right
 
-xxx
+git checkout devel
+git merge master
 
 # les fichiers dans l'index,
 # i.e. dans le prochain commit 

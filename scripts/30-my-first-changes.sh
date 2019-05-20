@@ -1,6 +1,6 @@
 
 # ce sera toujours notre façon de commencer
-[ -f scripts/helpers.sh ] && source scripts/helpers.sh; standard-start
+[ -f scripts/helpers.sh ] && source scripts/helpers.sh
 
 # si nécessaire, vous pouvez remettre le repository 
 # dans l'état où il est après le notebook 20-my-first-repo
@@ -8,7 +8,7 @@
 # pour cela enlever le premier caractère '#' 
 # et évaluer la cellule
 
-# bash scripts/20-my-first-repo.sh >& /dev/null
+# bash $TOPLEVEL/scripts/20-my-first-repo.sh >& /dev/null
 
 # si nécessaire, on se place dans le repo git
 [ -d my-first-repo ] && cd my-first-repo
@@ -101,12 +101,12 @@ show-diffs
 ls
 
 git reset --hard
-../scripts/populate.sh do-both-kinds-of-changes
+$TOPLEVEL/scripts/populate.sh do-both-kinds-of-changes
 
 show-diffs
 
 git reset --hard
-../scripts/populate.sh do-both-kinds-of-changes
+$TOPLEVEL/scripts/populate.sh do-both-kinds-of-changes
 
 
 # on vide l'index mais on conserve 
@@ -117,7 +117,7 @@ git reset
 show-diffs
 
 git reset --hard
-../scripts/populate.sh do-both-kinds-of-changes
+$TOPLEVEL/scripts/populate.sh do-both-kinds-of-changes
 
 
 # on abandonne la différence 
@@ -128,7 +128,7 @@ git checkout -- .
 show-diffs
 
 git reset --hard HEAD
-../scripts/populate.sh do-both-kinds-of-changes
+$TOPLEVEL/scripts/populate.sh do-both-kinds-of-changes
 
 # si on fait les deux 
 # c'est comme reset --hard

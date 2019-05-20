@@ -8,7 +8,7 @@ echo "je ne parle pas le Python, je parle le bash"
 pwd
 
 # ce sera toujours notre façon de commencer
-[ -f scripts/helpers.sh ] && source scripts/helpers.sh; standard-start
+[ -f scripts/helpers.sh ] && source scripts/helpers.sh
 
 # ces deux réglages pour git sont nécessaires
 # 

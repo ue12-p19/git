@@ -1,17 +1,21 @@
 
 # ce sera toujours notre façon de commencer
-[ -f scripts/helpers.sh ] && source scripts/helpers.sh; standard-start
+[ -f scripts/helpers.sh ] && source scripts/helpers.sh
 
 # en particulier pour savoir la version de `git` qui est installée
 git version
 
-# je détruis
-rm -rf my-first-repo
+# pour pouvoir recommencer le scénario depuis le début
+if [ -d my-first-repo ]; then
+    echo "on repart d'un directory vide"
+    rm -rf my-first-repo
 
-# on le crée, vide
-mkdir my-first-repo
+    # on le crée, vide
+    mkdir my-first-repo
+fi
 
-# on va dedans
+
+# dans tous les cas : on va dedans
 
 cd my-first-repo
 
@@ -105,7 +109,7 @@ show-repo
 git status
 
 # on crée deux fichiers; les détails importent peu
-../scripts/populate.sh create-two-files
+$TOPLEVEL/scripts/populate.sh create-two-files
 
 # leur contenu
 cat file1    
