@@ -6,9 +6,9 @@
 # 
 # pour cela enlever les commentaires qui suivent et évaluer la cellule
 
-bash $TOPLEVEL/scripts/10-my-first-repo.sh >& /dev/null
-bash $TOPLEVEL/scripts/20-my-first-changes.sh >& /dev/null
-bash $TOPLEVEL/scripts/30-my-first-branch.sh >& /dev/null
+# bash $TOPLEVEL/scripts/10-my-first-repo.sh >& /dev/null
+# bash $TOPLEVEL/scripts/20-my-first-changes.sh >& /dev/null
+# bash $TOPLEVEL/scripts/30-my-first-branch.sh >& /dev/null
 
 # si nécessaire, on se place dans le repo git
 [ -d my-first-repo ] && cd my-first-repo

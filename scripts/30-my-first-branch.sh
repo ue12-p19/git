@@ -111,12 +111,3 @@ git diff $fork $left
 git diff $left master
 
 git diff $fork $right
-
-* `git merge` crée si nécessaire ** un nouveau commit**
-  * qui contient les changements 
-  * faits dans les branches fusionnées
-
-* pour fusionner deux commits
-  * choisir la branche courante
-  * qui comme toujours va recevoir le commit
-  * désigner le (ou les) commits qu'il faut fusionner
