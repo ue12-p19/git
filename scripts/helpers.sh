@@ -12,4 +12,10 @@ function show-diffs() {
     git diff --cached
 }
 
-
+# this is for notebooks hosted on nbhosting
+case "$TERM" in
+    dumb)
+        export TERM=xterm ;;
+    *)
+        ;;
+esac
