@@ -1,0 +1,118 @@
+
+# ce sera toujours notre façon de commencer
+[ -f scripts/helpers.sh ] && source scripts/helpers.sh
+
+# si nécessaire, vous pouvez remettre le repository en l'état
+# 
+# pour cela enlever les commentaires qui suivent et évaluer la cellule
+
+# bash $TOPLEVEL/scripts/10-my-first-repo.sh >& /dev/null
+# bash $TOPLEVEL/scripts/20-my-first-changes.sh >& /dev/null
+# bash $TOPLEVEL/scripts/30-my-first-branch.sh >& /dev/null
+# bash $TOPLEVEL/scripts/40-kinds-of-merge.sh >& /dev/null
+
+# si nécessaire, on se place dans le repo git
+[ -d my-first-repo ] && cd my-first-repo
+
+pwd
+
+# vous devez avoir 9 commits
+git log --oneline | wc -l
+
+
+# le dernier s'appelle 'conflit résolu'
+git log -1 --format="%s"
+
+# et la branche courante est master
+git branch
+
+# le point de départ par défaut est HEAD
+
+show-repo
+
+# si je donne un point de départ
+
+show-repo devel
+
+# en partant d'un commit précis
+
+show-repo HEAD~2
+
+show-repo
+
+# je fais comme si je notais le sha-1
+# du sommet sur un bout de papier
+
+ghost=$(git log -1 --format='%h')
+echo $ghost
+
+# la branche courante est master
+# on la fait reculer d'un cran
+git reset --hard HEAD^
+
+# si je regarde master, je ne vois plus devel
+show-repo
+
+# si je regarde les branches connues
+# je ne vois plus le merge 'conflit résolu'
+show-repo --all
+
+# en précisant le hash
+show-repo $ghost
+
+# on est toujours dans master
+git branch
+
+git merge $ghost
+
+show-repo
+
+# git branch, sans option
+# montre la liste des branches
+# la branche courante est mise en relief
+
+git branch
+
+# git log -1 : pour ne voir que un commit
+git log --oneline -1 HEAD
+
+show-repo --all
+
+# pour juste créer une branche (sans y aller)
+# donner simplement un nom et un commit
+
+git branch foobar HEAD~2
+
+show-repo --all
+
+# pour renommer une branche 
+# (même la branche courante d'ailleurs)
+
+git branch -m foobar trucmuche
+
+show-repo --all
+
+# pour détruire une branche
+
+git branch -d trucmuche
+
+show-repo --all
+
+
+# je mets un signet
+git branch bookmark HEAD
+
+# maintenant si je reset master
+git reset --hard HEAD^
+
+show-repo --all
+
+git branch -d bookmark
+
+# avec -D on force la destruction
+git branch -D bookmark
+
+# le commit est bien sûr toujours là
+git merge $ghost
+
+show-repo
