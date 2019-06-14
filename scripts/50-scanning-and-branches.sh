@@ -10,10 +10,11 @@
 reset=""
 
 if [ -n "$reset" ]; then 
-    bash $TOPLEVEL/scripts/10-my-first-repo.sh
-    bash $TOPLEVEL/scripts/20-my-first-changes.sh
-    bash $TOPLEVEL/scripts/30-my-first-branch.sh
-    bash $TOPLEVEL/scripts/40-kinds-of-merge.sh
+    cd $TOPLEVEL
+    bash $SCRIPTS/10-my-first-repo.sh
+    bash $SCRIPTS/20-my-first-changes.sh
+    bash $SCRIPTS/30-my-first-branch.sh
+    bash $SCRIPTS/40-kinds-of-merge.sh
 fi >& /dev/null
 
 # si nécessaire, on se place dans le repo git

@@ -11,7 +11,8 @@
 reset=""
 
 if [ -n "$reset" ]; then 
-    bash $TOPLEVEL/scripts/10-my-first-repo.sh 
+    cd $TOPLEVEL
+    bash $SCRIPTS/10-my-first-repo.sh 
 fi >& /dev/null
 
 # si nécessaire, on se place dans le repo git
@@ -20,7 +21,7 @@ fi >& /dev/null
 pwd
 
 # vous devez avoir 4 commits
-show-repo
+git l
 
 # souvenez-vous que HEAD^^ signifie désigne le commit
 # qui est le grand-père de HEAD
@@ -105,12 +106,12 @@ show-diffs
 ls
 
 git reset --hard
-$TOPLEVEL/scripts/populate.sh do-both-kinds-of-changes
+$SCRIPTS/do both-kinds-of-changes
 
 show-diffs
 
 git reset --hard
-$TOPLEVEL/scripts/populate.sh do-both-kinds-of-changes
+$SCRIPTS/do both-kinds-of-changes
 
 
 # on vide l'index mais on conserve 
@@ -121,7 +122,7 @@ git reset
 show-diffs
 
 git reset --hard
-$TOPLEVEL/scripts/populate.sh do-both-kinds-of-changes
+$SCRIPTS/do both-kinds-of-changes
 
 
 # on abandonne la différence 
@@ -132,7 +133,7 @@ git checkout -- .
 show-diffs
 
 git reset --hard HEAD
-$TOPLEVEL/scripts/populate.sh do-both-kinds-of-changes
+$SCRIPTS/do both-kinds-of-changes
 
 # si on fait les deux 
 # c'est comme reset --hard

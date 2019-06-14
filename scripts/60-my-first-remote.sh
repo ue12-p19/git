@@ -10,10 +10,11 @@
 reset=""
 
 if [ -n "$reset" ]; then 
-    bash $TOPLEVEL/scripts/10-my-first-repo.sh
-    bash $TOPLEVEL/scripts/20-my-first-changes.sh
-    bash $TOPLEVEL/scripts/30-my-first-branch.sh
-    bash $TOPLEVEL/scripts/40-kinds-of-merge.sh
+    cd $TOPLEVEL
+    bash $SCRIPTS/10-my-first-repo.sh
+    bash $SCRIPTS/20-my-first-changes.sh
+    bash $SCRIPTS/30-my-first-branch.sh
+    bash $SCRIPTS/40-kinds-of-merge.sh
 fi >& /dev/null
 
 # si nécessaire, on se place dans le repo git
@@ -30,3 +31,20 @@ git log -1 --format="%s"
 
 # et la branche courante est master
 git branch
+
+if [ -d $TOPLEVEL/fake-github ]; then
+    rm -rf $TOPLEVEL/fake-github
+fi
+
+cd $TOPLEVEL
+git clone my-first-repo/.git fake-github
+
+
+cd $TOPLEVEL/fake-github
+
+ls
+
+show-repo
+
+cd $TOPLEVEL
+git clone https://github.com/parmentelat/nbautoeval

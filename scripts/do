@@ -1,0 +1,95 @@
+#!/bin/bash
+
+
+function create-readme() {
+    cat > README.md << EOF
+# lisez-moi
+
+Ce dépôt sert à ilustrer 
+notre cours sur **git**
+EOF
+}
+
+
+function fix-readme() {
+    sed -i.fixed -e 's/ilustrer/illustrer/' README.md
+    rm -f *.fixed
+}
+
+
+function create-license() {
+    echo 'Licence Creative Commons BY-NC-ND 4.0' > LICENSE
+}
+
+
+function create-code() {
+    cat > factorial.py <<EOF
+#!/usr/bin/python3
+
+# factoriel mais avec un petit bug dedans
+
+def factorial(n):
+    if n <= 0:
+        return n
+    else:
+        return n * factorial(n-1)
+EOF
+}
+
+
+function create-doc() {
+    cat > factorial.md << EOF
+# la fonction \`factorial\`
+
+renvoie le factoriel de son argument
+EOF
+}
+
+
+function fix-code() {
+    sed -i.fixed -e 's/n <= 0/n <= 1/' factorial.py
+    rm -f *.fixed
+}
+
+
+function no-worries-1() {
+    sed -i.fixed -e '2 i\
+# un changement sans problème' factorial.md
+    rm -f *.fixed    
+}
+
+
+function no-worries-2() {
+    sed -i.fixed 's/mais avec un petit bug dedans/avec bug corrigé/' factorial.py
+    rm -f *.fixed    
+}
+
+
+function conflict-1() {
+    sed -i.fixed -e 's/renvoie le factoriel de/renvoie le résultat de factoriel sur/' factorial.md
+    rm -f *.fixed
+}
+
+
+function conflict-2() {
+    sed -i.fixed -e 's/argument/paramètre/' factorial.md
+    rm -f *.fixed
+}
+
+
+
+function resolve-conflict() {
+    sed -i.fixed -e '/HEAD/{N;N;N;N;N;d;}' factorial.md
+    echo 'renvoie le résultat de factoriel sur son paramètre' >> factorial.md
+    rm -f *.fixed
+
+}
+################################
+function both-kinds-of-changes() {
+    echo "δ2: une ligne dans l'index" >> README.md
+    git add README.md
+    echo "δ1: pas dans l'index" >> README.md
+}
+
+
+"$@"

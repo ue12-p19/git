@@ -1,7 +1,10 @@
+# symlink in a worktree
+notebooks/scripts
+# figures source
+notebooks/figures.key
+# disposable
+notebooks/my-first-repo/
+notebooks/fake-github/
+# devenv
 node_modules
 venv
-.ipynb_checkpoints
-.macnb
-.gitGraph
-foo*
-nohup.out

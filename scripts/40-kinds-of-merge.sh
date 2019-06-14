@@ -7,12 +7,13 @@
 # pour cela mettez "true" au lieu de ""
 # et bien sûr évaluer la cellule
 
-reset=""
+reset="true"
 
 if [ -n "$reset" ]; then 
-    bash $TOPLEVEL/scripts/10-my-first-repo.sh
-    bash $TOPLEVEL/scripts/20-my-first-changes.sh
-    bash $TOPLEVEL/scripts/30-my-first-branch.sh
+    cd $TOPLEVEL
+    bash $SCRIPTS/10-my-first-repo.sh
+    bash $SCRIPTS/20-my-first-changes.sh
+    bash $SCRIPTS/30-my-first-branch.sh
 fi >& /dev/null
 
 # si nécessaire, on se place dans le repo git
@@ -31,25 +32,18 @@ git merge master
 
 show-repo
 
-# rappel
-cat file1
-
 # un changement qui
 # ne sera pas conflictuel
 
-echo 'pas de souci' >> file1
+$SCRIPTS/do no-worries-1
 
-cat file2
+# celui-ci par contre le sera
 
-# modifions une ligne dans file2
+$SCRIPTS/do conflict-1
 
-sed -i.patch -e 's|line2 of file2|DANS DEVEL|' file2
+git diff
 
-cat file1
-
-cat file2
-
-git add file1 file2
+git add factorial.md
 git commit -m 'pour conflit dans devel'
 
 show-repo --all
@@ -57,15 +51,16 @@ show-repo --all
 # remettons-nous au commit précédent
 git checkout master
 
-# nous sommes sur devel
-# modifions une ligne
+# même logique, on fait deux changements
 
-sed -i.patch -e 's|line2 of file2|DANS MASTER|' file2
+$SCRIPTS/do no-worries-2
+$SCRIPTS/do conflict-2
 
-cat file2
+git diff
 
-git add file2
-git commit -m'pour conflit dans master'
+git add factorial.py factorial.md
+
+git commit -m'pour conflit, dans master'
 
 show-repo --all
 
@@ -75,22 +70,19 @@ git merge devel
 
 git status
 
-cat file2
+cat factorial.md
 
 # je simule une modification sous éditeur
-cat > file2 << EOF
-line1 of file2
-DANS MASTER et dans DEVEL
-line3 of file2
-EOF
+$SCRIPTS/do resolve-conflict
 
+cat factorial.md
 
 # pas de changement naturellement
 git status
 
 # maintenant on peut mettre 
 # la résolution du conflit dans l'index
-git add file2
+git add factorial.md
 
 # plus de souci
 git status

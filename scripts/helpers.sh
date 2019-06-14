@@ -2,6 +2,8 @@
 export TOPLEVEL="${TOPLEVEL:-$(pwd)}"
 echo TOPLEVEL=$TOPLEVEL
 
+SCRIPTS=$(cd $TOPLEVEL/../scripts; pwd)
+
 function show-repo() { git log --oneline --graph "$@"; }
 
 

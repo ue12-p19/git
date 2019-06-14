@@ -5,18 +5,19 @@
 # en particulier pour savoir la version de `git` qui est installée
 git version
 
+cd $TOPLEVEL
+
 # pour pouvoir recommencer le scénario depuis le début
+# je nettoie complètement ce qu'on a pu faire précédemment
 if [ -d my-first-repo ]; then
     echo "on repart d'un directory vide"
     rm -rf my-first-repo
-
-    # on le crée, vide
-    mkdir my-first-repo
 fi
 
+# on le crée
+mkdir my-first-repo
 
-# dans tous les cas : on va dedans
-
+# on va dedans
 cd my-first-repo
 
 ls -a
@@ -30,30 +31,41 @@ ls -aF
 # on voit un répertoire vide
 ls 
 
+# git log se plaint, c'est normal 
+# car on n'a encore créé aucun commit
 git log
 
-cat > README.md << EOF
-# lisez-moi
-
-Ce dépôt sert à ilustrer 
-notre cours sur **git**
-EOF
+# là je triche, je crée README.md par script 
+# imaginez que j'ai utilisé un éditeur de texte
+$SCRIPTS/do create-readme
 
 # voyons ce fichier
 cat README.md
 
+# on a pour l'instant une différence 
+# entre l'espace de travail et l'index: en rouge
 git status
 
 git add README.md
 
+# notre différence est maintenant montrée en vert
+git status
+
 git commit -m 'my first commit: added README.md'
 
+# pour l'instant on n'en a qu'un
 git log
 
+# il n'y a plus de changement dans l'index
+git status
+
+git log   
+
+# on reparlera de git log tout à l'heure
 git log --oneline
 
 # lorsque le fichier ne fait qu'une seule ligne, pas besoin de EOF
-echo 'Licence Creative Commons BY-NC-ND 4.0' > LICENSE
+$SCRIPTS/do create-license
 
 # voici le contenu du fichier LICENSE
 cat LICENSE
@@ -66,16 +78,17 @@ git add LICENSE
 git status
 
 # maintenant je corrige la faute d'orthographe
-sed -i -e s,ilustrer,illustrer, README.md
-rm -f README.md-e
+
+# de nouveau, normalement on fait ça avec un éditeur
+# ici j'utilise un outil en ligne de commande, peu importe...
+$SCRIPTS/do fix-readme 
 
 # voici maintenant git status
-# remarquez la différence entre 
-# ce qui est en vert et ce qui est en rouge
-# nous y reviendrons
+# remarquez ce qui est en vert et ce qui est en rouge
+# qui correspond aux deux étages
 git status
 
-git diff README.md
+git diff
 
 # c'est bien ce que je voulais faire
 # donc je peux ajouter tout le fichier 
@@ -93,12 +106,13 @@ git log
 # le format par défaut de git log est vite encombrant, si on veut condenser
 git log --oneline
 
-# pour éviter de retaper cette phrase un peu longue
-# j'en profite pour ajouter l'option --graph qui est utile 
-# lorsque les dépendances deviennent moins simples
-function show-repo() { git log --oneline --graph; }
+git log --oneline --graph
 
-show-repo
+# on peut facilement se définir des raccourcis
+git config --global alias.l "log --oneline --graph"
+
+# du coup c'est plus rapide
+git l
 
 # pour voir la documentation complète
 # de git log (attention très très long !)
@@ -106,30 +120,39 @@ show-repo
 
 # git log --help
 
+git l
+
 git status
 
 # on crée deux fichiers; les détails importent peu
-$TOPLEVEL/scripts/populate.sh create-two-files
+$SCRIPTS/do create-code
+
+$SCRIPTS/do create-doc
 
 # leur contenu
-cat file1    
+cat factorial.py    
 
-cat file2  
+cat factorial.md
 
+# les fichiers dans le commit courant 
+# (en fait dans l'index mais ici c'est pareil)
 git ls-files
 
-ls -1F
+# sur le disque
+ls -1
 
 # un changement dans README.md
 echo 'commit #3' >> README.md
 
+git status
+
 # je prépare le commit 
-git add README.md file1 
+git add README.md factorial.py 
 
 # je fais le commit
-git commit -m "new file file1, tweak README"
+git commit -m "new code file, tweak README"
 
-show-repo
+git l
 
 # un changement dans README.md
 echo 'commit #4' >> README.md
@@ -142,26 +165,25 @@ git status
 # si j'ajoute les deux fichiers file1 et file3
 # je prépare un commit qui contient 
 # tout ce qu'il y a dans mon répertoire de travail
-git add README.md file2
+git add README.md factorial.md
 
 # du coup tout est en vert
 git status
 
-git commit -m "adding file2, we now have 4 files"
+git commit -m "adding markdown, we now have 4 files"
 
-show-repo
-
-git log --oneline HEAD^
-
-git log --oneline HEAD^^
-
-# du coup je peux améliorer un peu mon raccourci
-# avec cette incantation un peu magique, je passe à git log
-# les mêmes paramètres que je reçois de show-repo
-function show-repo() { git log --oneline --graph "$@"; }
-
-show-repo HEAD^^^
+git l
 
 ls -l
 
 git ls-tree HEAD
+
+# par exemple si je parcours les commits en partant de HEAD
+# j'en vois donc 4
+git l HEAD
+
+# si je pars de HEAD^, je n'en plus que 3
+git l HEAD^
+
+# et ainsi de suite
+git log --oneline HEAD^^

@@ -10,8 +10,9 @@
 reset=""
 
 if [ -n "$reset" ]; then 
-    bash $TOPLEVEL/scripts/10-my-first-repo.sh 
-    bash $TOPLEVEL/scripts/20-my-first-changes.sh 
+    cd $TOPLEVEL
+    bash $SCRIPTS/10-my-first-repo.sh 
+    bash $SCRIPTS/20-my-first-changes.sh 
 fi >& /dev/null
 
 # si nécessaire, on se place dans le repo git
@@ -108,8 +109,7 @@ show-repo -1 $right
 show-repo -1 $fork
 
 
-git diff $
-right master
+git diff $right master
 
 git diff $fork $left
 
