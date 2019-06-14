@@ -7,7 +7,7 @@
 # pour cela mettez "true" au lieu de ""
 # et bien sûr évaluer la cellule
 
-reset="true"
+reset=""
 
 if [ -n "$reset" ]; then 
     cd $TOPLEVEL
@@ -23,14 +23,14 @@ pwd
 
 # vous devez avoir deux branches, 6 commits dont un merge
 # et être sur la branche master 
-show-repo --all
+git l --all
 
-show-repo
+git l
 
 git checkout devel
 git merge master
 
-show-repo
+git l
 
 # un changement qui
 # ne sera pas conflictuel
@@ -46,7 +46,7 @@ git diff
 git add factorial.md
 git commit -m 'pour conflit dans devel'
 
-show-repo --all
+git l --all
 
 # remettons-nous au commit précédent
 git checkout master
@@ -62,7 +62,7 @@ git add factorial.py factorial.md
 
 git commit -m'pour conflit, dans master'
 
-show-repo --all
+git l --all
 
 
 # on est sur master
@@ -90,7 +90,7 @@ git status
 # et à présent on peut committer
 git commit -m  'conflit résolu'
 
-show-repo --all
+git l --all
 
 git diff devel master
 

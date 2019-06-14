@@ -22,7 +22,7 @@ pwd
 
 # vous devez avoir 4 commits, deux branches
 # et être sur la branche devel
-show-repo --all
+git l --all
 
 # la branche courante est devel
 # du coup si on crée un commit
@@ -32,7 +32,7 @@ echo "dans la branche devel" >> LICENSE
 git add LICENSE
 git commit -m "le début de la branche devel"
 
-show-repo --all
+git l --all
 
 ls
 
@@ -63,29 +63,29 @@ git merge devel -m "mon premier merge"
 # remarquez le nouveau commit 
 # qui est bien sûr
 # créé dans la branche courante
-show-repo
+git l
 
-show-repo
+git l
 
-show-repo -1 master^
+git l -1 master^
 
-show-repo -1 master~2
+git l -1 master~2
 
-show-repo
+git l
 
-show-repo -1 master^
+git l -1 master^
 
-show-repo -1 master^2
+git l -1 master^2
 
-show-repo 
+git l
 
 # première à droite, puis on descend
-show-repo -1 master^2^
+git l -1 master^2^
 
 # c'est donc comme si j'était descendu 3 fois
-show-repo -1 master~3
+git l -1 master~3
 
-show-repo --all
+git l --all
 
 # l'endroit de la 'fourche' c'est
 git merge-base master^ master^2
@@ -100,13 +100,13 @@ left="master^"
 
 right="master^2"
 
-show-repo -1 master
+git l -1 master
 
-show-repo -1 $left
+git l -1 $left
 
-show-repo -1 $right
+git l -1 $right
 
-show-repo -1 $fork
+git l -1 $fork
 
 
 git diff $right master

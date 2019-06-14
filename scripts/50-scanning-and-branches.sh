@@ -34,17 +34,17 @@ git branch
 
 # le point de départ par défaut est HEAD
 
-show-repo
+git l
 
 # si je donne un point de départ
 
-show-repo devel
+git l devel
 
 # en partant d'un commit précis
 
-show-repo HEAD~2
+git l HEAD~2
 
-show-repo
+git l
 
 # je fais comme si je notais le sha-1
 # du sommet sur un bout de papier
@@ -57,21 +57,21 @@ echo $ghost
 git reset --hard HEAD^
 
 # si je regarde master, je ne vois plus devel
-show-repo
+git l
 
 # si je regarde les branches connues
 # je ne vois plus le merge 'conflit résolu'
-show-repo --all
+git l --all
 
 # en précisant le hash
-show-repo $ghost
+git l $ghost
 
 # on est toujours dans master
 git branch
 
 git merge $ghost
 
-show-repo
+git l
 
 # git branch, sans option
 # montre la liste des branches
@@ -82,27 +82,27 @@ git branch
 # git log -1 : pour ne voir que un commit
 git log --oneline -1 HEAD
 
-show-repo --all
+git l --all
 
 # pour juste créer une branche (sans y aller)
 # donner simplement un nom et un commit
 
 git branch foobar HEAD~2
 
-show-repo --all
+git l --all
 
 # pour renommer une branche 
 # (même la branche courante d'ailleurs)
 
 git branch -m foobar trucmuche
 
-show-repo --all
+git l --all
 
 # pour détruire une branche
 
 git branch -d trucmuche
 
-show-repo --all
+git l --all
 
 
 # je mets un signet
@@ -111,7 +111,7 @@ git branch bookmark HEAD
 # maintenant si je reset master
 git reset --hard HEAD^
 
-show-repo --all
+git l --all
 
 git branch -d bookmark
 
@@ -121,4 +121,4 @@ git branch -D bookmark
 # le commit est bien sûr toujours là
 git merge $ghost
 
-show-repo
+git l

@@ -28,9 +28,9 @@ git l
 
 git checkout -b devel HEAD^^
 
-show-repo
+git l
 
-show-repo --all
+git l --all
 
 # quand on change de branche
 # les fichiers sur le disque changent aussi !

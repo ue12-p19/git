@@ -44,7 +44,7 @@ cd $TOPLEVEL/fake-github
 
 ls
 
-show-repo
+git l
 
 cd $TOPLEVEL
 git clone https://github.com/parmentelat/nbautoeval

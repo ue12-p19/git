@@ -4,9 +4,6 @@ echo TOPLEVEL=$TOPLEVEL
 
 SCRIPTS=$(cd $TOPLEVEL/../scripts; pwd)
 
-function show-repo() { git log --oneline --graph "$@"; }
-
-
 function show-diffs() {
     echo '---------- FILES <-> INDEX'
     git diff "$@"
