@@ -10,7 +10,7 @@ RUN git config --global user.email "notebook.user@example.org" && git config --g
 RUN jupyter nbextension enable splitcell/splitcell
 
 # install rise
-RUN pip install rise
+RUN pip install --pre rise
 
 RUN pip install ipywidgets && jupyter nbextension enable --py widgetsnbextension
 
