@@ -77,19 +77,41 @@ function conflict-2() {
 }
 
 
-
 function resolve-conflict() {
     sed -i.fixed -e '/HEAD/{N;N;N;N;N;d;}' factorial.md
     echo 'renvoie le résultat de factoriel sur son paramètre' >> factorial.md
     rm -f *.fixed
 
 }
-################################
+
+
 function both-kinds-of-changes() {
     echo "δ2: une ligne dans l'index" >> README.md
     git add README.md
     echo "δ1: pas dans l'index" >> README.md
 }
+
+################################
+function populate-initial-repo() {
+    git init
+    create-readme
+    fix-readme
+    create-license
+    git add README.md LICENSE
+    git commit -m 'readme + licence'
+    
+    git checkout -b devel
+    create-code 
+    fix-code
+    create-doc
+    git add factorial.py factorial.md
+    git commit -m'code + doc'
+    
+}
+
+
+
+
 
 
 "$@"
