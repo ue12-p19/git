@@ -109,9 +109,16 @@ function populate-initial-repo() {
     
 }
 
+function first-commit-in-initial() {
+    no-worries-2
+    git add factorial.py
+    git commit -m "fix factorial in initial repo"
+}
 
-
-
-
+function commit-in-initial-for-simple-push() {
+    echo 'un changement fait dans initial pour être poussé' >> README.md
+    git add README.md
+    git commit -m 'premier push'
+}
 
 "$@"
