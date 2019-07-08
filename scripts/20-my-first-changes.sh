@@ -11,7 +11,7 @@
 reset=""
 
 if [ -n "$reset" ]; then 
-    cd $TOPLEVEL
+    cd $TOP
     bash $SCRIPTS/10-my-first-repo.sh 
 fi >& /dev/null
 

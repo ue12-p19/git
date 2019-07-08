@@ -1,8 +1,8 @@
 # remember pwd fo the first time this is loaded
-export TOPLEVEL="${TOPLEVEL:-$(pwd)}"
-echo TOPLEVEL=$TOPLEVEL
+export TOP="${TOP:-$(pwd)}"
+echo TOP=$TOP
 
-SCRIPTS=$(cd $TOPLEVEL/../scripts; pwd)
+SCRIPTS=$(cd $TOP/../scripts; pwd)
 
 function show-diffs() {
     echo '---------- FILES <-> INDEX'

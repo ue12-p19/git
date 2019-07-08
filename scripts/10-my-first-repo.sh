@@ -5,7 +5,7 @@
 # en particulier pour savoir la version de `git` qui est installée
 git version
 
-cd $TOPLEVEL
+cd $TOP
 
 # pour pouvoir recommencer le scénario depuis le début
 # je nettoie complètement ce qu'on a pu faire précédemment

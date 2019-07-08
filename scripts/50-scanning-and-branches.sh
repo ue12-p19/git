@@ -10,7 +10,7 @@
 reset=""
 
 if [ -n "$reset" ]; then 
-    cd $TOPLEVEL
+    cd $TOP
     bash $SCRIPTS/10-my-first-repo.sh
     bash $SCRIPTS/20-my-first-changes.sh
     bash $SCRIPTS/30-my-first-branch.sh

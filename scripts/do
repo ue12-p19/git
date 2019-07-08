@@ -92,7 +92,7 @@ function both-kinds-of-changes() {
 }
 
 ################################
-function populate-initial-repo() {
+function populate-repo-alice() {
     git init
     create-readme
     fix-readme
@@ -109,16 +109,28 @@ function populate-initial-repo() {
     
 }
 
-function first-commit-in-initial() {
+function first-commit-in-alice() {
     no-worries-2
     git add factorial.py
-    git commit -m "fix factorial in initial repo"
+    git commit -m "fix factorial by alice repo"
 }
 
 function commit-in-initial-for-simple-push() {
     echo 'un changement fait dans initial pour être poussé' >> README.md
     git add README.md
     git commit -m 'premier push'
+}
+
+# broken push
+function commit-alice() {
+    echo 'added by alice' >> README.md
+    git add README.md
+    git commit -m 'contribution Alice dans README'
+}
+function commit-bob() {
+    echo 'added by bob' >> LICENSE
+    git add LICENSE
+    git commit -m 'contribution Bob dans LICENSE'
 }
 
 "$@"
