@@ -8,3 +8,6 @@ notebooks/fake-github/
 # devenv
 node_modules
 venv
+notebooks/fake-github.git
+notebooks/repo-alice
+notebooks/repo-bob
