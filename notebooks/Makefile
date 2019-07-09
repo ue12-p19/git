@@ -2,6 +2,8 @@
 # (*) nbnorm is the historical custom tool from flotpython
 # (*) for nbpublish
 #     pip install ipypublish 
+# (*) with the sphinx engine (broken for us - unused)
+#     pip install ipypublish[sphinx]
 # (*) notebook concatenation i.e. nbtb cat
 #     pip install nbtoolbelt
 
@@ -11,6 +13,14 @@ NORMALIZE_OPTIONS = --author "Thierry Parmentelat" --logo-path media/inria-25-al
 
 # nbpublish insists on getting an absolute path for output path
 ABSEXPORT = $(shell pwd)/exporting
+
+# by default
+HTMLSTYLE = html_ipypublish_all 
+# static reveal slides
+SLIDESSTYLE = slides_ipypublish_all
+
+# sphinx output comes with a toc but figures are broken
+SPHINXSTYLE = sphinx_ipypublish_main.run
 
 NOTEBOOKS := $(shell git ls-files *.ipynb)
 SHELLS = $(foreach nb,$(subst .ipynb,.sh,$(NOTEBOOKS)),../scripts/$(nb))
@@ -40,12 +50,14 @@ plan:
 # live slideshows, seems to be html
 
 
-export: exec html
+export: exec html media
 
 ####
 exporting:
 	mkdir exporting
 
+media: exporting
+	(cd exporting; ln -s ../../media)
 
 
 ####
@@ -62,7 +74,7 @@ exec: exporting $(EXECS)
 HTMLS=$(foreach nb,$(NOTEBOOKS),exporting/$(subst .ipynb,.exec.html,$(nb)))
 
 exporting/%.exec.html:%.ipynb 
-	nbpublish -f html_ipypublish_all -o $(ABSEXPORT) exporting/$*.exec.ipynb
+	nbpublish -f $(HTMLSTYLE) -o $(ABSEXPORT) exporting/$*.exec.ipynb
 	rm exporting/*.log
 
 html: exporting $(HTMLS)
@@ -71,13 +83,25 @@ html: exporting $(HTMLS)
 
 #### bundle
 bundle: exporting/ALL.html
+slides: exporting/ALL.slides.html
 
 exporting/ALL.ipynb: $(EXECS)
 	nbtb cat exporting/[0-9]*.exec.ipynb
 	mv exporting/0*-cat.ipynb $@
 
 exporting/ALL.html: exporting/ALL.ipynb
-	nbpublish -f html_ipypublish_all -o $(ABSEXPORT) exporting/ALL.ipynb
+	nbpublish -f $(HTMLSTYLE) -o $(ABSEXPORT) exporting/ALL.ipynb
+	rm exporting/*.log
+
+# static reveal slides
+exporting/ALL.slides.html: exporting/ALL.ipynb
+	nbpublish -f $(SLIDESSTYLE) -o $(ABSEXPORT) exporting/ALL.ipynb
+	rm exporting/*.log
+
+# this one has the same figure all over the document
+exporting/ALL-sphinx.html: exporting/ALL.ipynb
+	nbpublish -f $(SPHINXSTYLE) -o $(ABSEXPORT) exporting/ALL.ipynb
+	mv -f exporting/ALL.html $@
 	rm exporting/*.log
 
 
@@ -87,17 +111,8 @@ exporting/ALL.html: exporting/ALL.ipynb
 # end up unchanged and clobber the output, esp. for this course 
 # so let's forget about that for now
 
-####
-MDS=$(foreach nb,$(NOTEBOOKS),exporting/$(subst .ipynb,.exec.md,$(nb)))
+clean:
+	rm -rf exporting/*.html exporting/ALL*
 
-exporting/%.exec.md:%.ipynb 
-	jupyter nbconvert --to markdown --execute $*.ipynb --output exporting/$*.md
-
-md: exporting $(MDS)
-
-
-
-all-md: exporting/ALL.md
-exporting/ALL.md: $(MDS)
-	cat $(MDS) > $@
-
+superclean:
+	rm -rf exporting
