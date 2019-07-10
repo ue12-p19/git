@@ -1,3 +1,6 @@
-scripts -> scripts
-media -> media
-rise.css -> media/rise.css
+# given that this course is run in classroom mode
+# we don't rely on static mappings 
+# and create symlinks as git files instead
+# scripts -> scripts
+# media -> media
+# rise.css -> media/rise.css
