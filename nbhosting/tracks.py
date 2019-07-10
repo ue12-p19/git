@@ -19,7 +19,7 @@ def tracks(coursedir):
     # 3: for notebooks named 1[0-9][0-9]*
 
     section_specs = [
-        ('Introducion', '00[0-9]*.ipynb'),
+        ('Introduction', '00[0-9]*.ipynb'),
         ('Primer', '0[1-9][0-9]*.ipynb'),
         ('Approfondissement', '1[0-9][0-9]*.ipynb'),
         ]
