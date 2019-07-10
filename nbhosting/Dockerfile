@@ -15,14 +15,19 @@ RUN pip install --pre rise
 RUN pip install ipywidgets && jupyter nbextension enable --py widgetsnbextension
 
 
-### kernels
-# let's go with this one which is based on metakernel 
+### bash kernel
 
+# let's go with this one which is based on metakernel 
 RUN pip install calysto_bash
 
-## not quite sure yet which is best, let's ship both for now
-#
+# these 2 are also available, but less responsive 
 #RUN pip install bash_kernel && python -m bash_kernel.install
-#
 #RUN pip install metakernel_bash && python -m metakernel_bash install
+
+
+### git tools 
+
+RUN pip install git+https://github.com/parmentelat/nbgitpuller@nbhosting && jupyter serverextension enable --py nbgitpuller 
+
+RUN jupyter labextension install @jupyterlab/git && pip install --upgrade jupyterlab-git && jupyter serverextension enable --py jupyterlab_git
 
