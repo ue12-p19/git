@@ -54,7 +54,7 @@ class Notebook:
         self.name = name
         self.filename = f"{self.name}.ipynb"
         self.verbose = verbose
-
+        self.sections = []        
 
     def parse(self):
         try:
@@ -95,6 +95,25 @@ class Notebook:
             print(f"found and removed {nb_found} license cells")
 
 
+    def compute_plan(self):
+        """
+        fills in self.sections from text cells that 
+        start with 1 or 2 #
+        """
+        for cell in self.cells():
+            if cell['cell_type'] != 'markdown':
+                continue
+            contents = self.cell_contents(cell).split('\n')[0]
+            if (contents.startswith('# ')
+                or contents.startswith('## ')):
+                self.sections.append(contents)
+        plan_filename = f"{self.name}-plan.md"
+        with open(plan_filename, 'w') as output:
+            for line in self.sections:
+                print(line, file=output)
+        print(f"PLAN written in {plan_filename}")
+            
+
     def save(self):
         outfilename = self.filename
         # don't specify output version for now
@@ -106,6 +125,7 @@ class Notebook:
     def full_monty(self, license):
         self.parse()
         self.remove_license_cells(license)
+        self.compute_plan()
         self.save()
 
 

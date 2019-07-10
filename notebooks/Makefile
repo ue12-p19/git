@@ -40,7 +40,7 @@ shell: $(SHELLS)
 
 ####
 plan:
-	grep '"## ' $(NOTEBOOKS) > PLAN.grep
+	egrep '"#{1,2} ' $(NOTEBOOKS) > PLAN.grep
 
 #########################################################################
 # execution / conversion / publication
@@ -55,12 +55,15 @@ plan:
 
 export: exec html media
 
+.PHONY: export exec html media
+
 ####
 exporting:
 	mkdir exporting
 
-media: exporting
-	(cd exporting; ln -s ../../media)
+media: 
+	mkdir -p exporting/media
+	(cd ../media; rsync -ai $$(git ls-files) ../notebooks/exporting/media/)
 
 
 ####
@@ -85,6 +88,9 @@ html: exporting $(HTMLS)
 
 
 #### bundle
+
+.PHONY: bundle slides sphinx
+
 bundle: exporting/ALL.html
 slides: exporting/SLIDES.html
 
@@ -109,6 +115,8 @@ exporting/SLIDES.html: exporting/SLIDES.ipynb
 
 
 # this one has the same figure all over the document
+sphinx: exporting/ALL-sphinx.html
+
 exporting/ALL-sphinx.html: exporting/ALL.ipynb
 	nbpublish -f $(SPHINXSTYLE) -o $(ABSEXPORT) exporting/ALL.ipynb
 	mv -f exporting/ALL.html $@
