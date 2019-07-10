@@ -10,6 +10,7 @@
 
 NORMALIZE = ../../flotpython-tools/tools/nbnorm.py
 NORMALIZE_OPTIONS = --author "Thierry Parmentelat" --logo-path media/inria-25-alpha.png --rise
+LICENCE_STRIP = ../tools/nbstriplicense.py
 
 # nbpublish insists on getting an absolute path for output path
 ABSEXPORT = $(shell pwd)/exporting
@@ -18,9 +19,11 @@ ABSEXPORT = $(shell pwd)/exporting
 HTMLSTYLE = html_ipypublish_all 
 # static reveal slides
 SLIDESSTYLE = slides_ipypublish_all
-
 # sphinx output comes with a toc but figures are broken
 SPHINXSTYLE = sphinx_ipypublish_main.run
+
+
+
 
 NOTEBOOKS := $(shell git ls-files *.ipynb)
 SHELLS = $(foreach nb,$(subst .ipynb,.sh,$(NOTEBOOKS)),../scripts/$(nb))
@@ -83,7 +86,7 @@ html: exporting $(HTMLS)
 
 #### bundle
 bundle: exporting/ALL.html
-slides: exporting/ALL.slides.html
+slides: exporting/SLIDES.html
 
 exporting/ALL.ipynb: $(EXECS)
 	nbtb cat exporting/[0-9]*.exec.ipynb
@@ -94,9 +97,16 @@ exporting/ALL.html: exporting/ALL.ipynb
 	rm exporting/*.log
 
 # static reveal slides
-exporting/ALL.slides.html: exporting/ALL.ipynb
-	nbpublish -f $(SLIDESSTYLE) -o $(ABSEXPORT) exporting/ALL.ipynb
+exporting/SLIDES.ipynb: exporting/ALL.ipynb
+	cp exporting/ALL.ipynb $@
+	$(LICENCE_STRIP) $@
+
+exporting/SLIDES.html: exporting/SLIDES.ipynb
+	nbpublish -f $(SLIDESSTYLE) -o $(ABSEXPORT) exporting/SLIDES.ipynb
+	mv -f exporting/SLIDES.slides.html $@
 	rm exporting/*.log
+
+
 
 # this one has the same figure all over the document
 exporting/ALL-sphinx.html: exporting/ALL.ipynb
