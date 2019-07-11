@@ -4,8 +4,8 @@
 #     pip install ipypublish 
 # (*) with the sphinx engine (broken for us - unused)
 #     pip install ipypublish[sphinx]
-# (*) notebook concatenation i.e. nbtb cat
-#     pip install nbtoolbelt
+# (*) notebook concatenation
+#     pip install nbmerge
 
 
 NORMALIZE = ../../flotpython-tools/tools/nbnorm.py
@@ -95,8 +95,7 @@ bundle: exporting/ALL.html
 slides: exporting/SLIDES.html
 
 exporting/ALL.ipynb: $(EXECS)
-	nbtb cat exporting/[0-9]*.exec.ipynb
-	mv exporting/0*-cat.ipynb $@
+	nbmerge exporting/[0-9]*.exec.ipynb > $@
 
 exporting/ALL.html: exporting/ALL.ipynb
 	nbpublish -f $(HTMLSTYLE) -o $(ABSEXPORT) exporting/ALL.ipynb
@@ -122,6 +121,8 @@ exporting/ALL-sphinx.html: exporting/ALL.ipynb
 	mv -f exporting/ALL.html $@
 	rm exporting/*.log
 
+foo:
+	nbpublish -f $(SPHINXSTYLE) -o $(ABSEXPORT) exporting/[0-9]*.ipynb
 
 ### 
 # markdown would be nice too, at least for creating a single bundled document
