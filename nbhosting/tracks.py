@@ -18,11 +18,11 @@ def tracks(coursedir):
     # 2: for notebooks named 0[1-9]0*
     # 3: for notebooks named 1[0-9][0-9]*
 
-    section_specs = [
-        ('Introduction', '00[0-9]*.ipynb'),
-        ('Primer', '0[1-9][0-9]*.ipynb'),
-        ('Approfondissement', '1[0-9][0-9]*.ipynb'),
-        ]
+    section_names = [
+        'Introduction',
+        'Primer',
+        'Approfondissement',
+    ]
 
 
     default_track =  Track(
@@ -31,9 +31,9 @@ def tracks(coursedir):
                  name=section_name,
                  notebooks=notebooks_by_pattern(
                      coursedir,
-                     f"notebooks/{pattern}"))
-         for number, (section_name, pattern) in enumerate(section_specs, 1)],
-        name="unique",
+                     f"notebooks/{number}-*.ipynb"))
+         for number, section_name in enumerate(section_names, 1)],
+        name="single",
         description="git tuto")
 
     return [default_track]
