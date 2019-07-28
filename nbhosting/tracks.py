@@ -13,27 +13,27 @@ def tracks(coursedir):
     result is a list of Track instances
     """
 
-    # define a single track that has sections:
-    # 1: for notebooks named 00*
-    # 2: for notebooks named 0[1-9]0*
-    # 3: for notebooks named 1[0-9][0-9]*
+    # 2 tracks
+    # 'intro' : 2 sections 1* et 2*
+    # 'approfondissement' : 3*
 
-    section_names = [
-        'Introduction',
-        'Primer',
-        'Approfondissement',
-    ]
+    track_specs = [
+        ('intro' , 'niveau élémentaire', 
+         [ ('survol', '1-*.ipynb'),
+           ('primer', '2-*.ipynb'),
+         ]),
+        ('approfondissement', 'niveau intermédiaire',
+         [ ('avancé', '3-*.ipynb'),
+         ]),
+        ]
 
-
-    default_track =  Track(
-        coursedir,
-        [Section(coursedir=coursedir,
-                 name=section_name,
-                 notebooks=notebooks_by_pattern(
-                     coursedir,
-                     f"notebooks/{number}-*.ipynb"))
-         for number, section_name in enumerate(section_names, 1)],
-        name="single",
-        description="git tuto")
-
-    return [default_track]
+    return [Track(coursedir, 
+                  [Section(coursedir=coursedir,
+                           name=section_name, 
+                           notebooks=notebooks_by_pattern(
+                               coursedir,
+                               f"notebooks/{pattern}"))
+                   for section_name, pattern in section_specs],
+                  name=track_name,
+                  description=track_description)
+            for track_name, track_description, section_specs in track_specs]
