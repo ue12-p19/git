@@ -75,13 +75,15 @@ exec: exporting $(EXECS)
 
 #### bundle
 
-.PHONY: sphinx
+.PHONY: sphinx view-sphinx
 
 sphinx: exporting/build/html/index.html
 
-exporting/build/html/index.html: $(EXECS)
+exporting/build/html/index.html: exporting/index.rst exporting/conf.py $(EXECS) 
 	sphinx-build -b html exporting exporting/build/html
 
+view-sphinx:
+	open exporting/build/html/index.html
 
 ### 
 # markdown would be nice too, at least for creating a single bundled document
