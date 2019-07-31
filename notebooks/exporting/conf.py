@@ -27,6 +27,7 @@ ipysphinx_output_prompt = 'Out:'
 ipysphinx_input_toggle = True
 ipysphinx_output_toggle = True
 html_theme = "sphinx_rtd_theme" 
+html_title = "git tuto" 
 
 todo_include_todos = False
 
@@ -47,3 +48,4 @@ ipysphinx_show_prompts = True
 ipysphinx_input_prompt = "[{count}]:"
 
 ipysphinx_output_prompt = "[{count}]:"
+
