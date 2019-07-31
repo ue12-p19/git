@@ -2,6 +2,7 @@ calysto_bash
 jupyterlab
 nbautoeval
 ipythontutor
+rise
 nbstripout
 nbdime
 nbmerge
