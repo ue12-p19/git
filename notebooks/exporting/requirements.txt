@@ -1,0 +1,2 @@
+ipypublish[sphinx]
+sphinx-rtd-theme

@@ -1,0 +1,10 @@
+jupyterlab
+nbautoeval
+ipythontutor
+nbstripout
+nbdime
+nbmerge
+-r notebooks/exporting/requirements.txt
+jupyter-contrib-nbextensions
+ipywidgets
+calysto_bash

@@ -10,7 +10,7 @@
 
 NORMALIZE = ../../flotpython-tools/tools/nbnorm.py
 NORMALIZE_OPTIONS = --author "Thierry Parmentelat" --logo-path media/inria-25-alpha.png --rise
-LICENCE_STRIP = ../tools/nbstriplicense.py
+LICENCE_STRIP = ../../flotpython-gittutorial/tools/nbstriplicense.py
 
 # using ipypublish instead of sphinx-build
 # nbpublish insists on getting an absolute path for output path
@@ -26,13 +26,15 @@ LICENCE_STRIP = ../tools/nbstriplicense.py
 
 
 NOTEBOOKS := $(shell git ls-files *.ipynb)
-SHELLS = $(foreach nb,$(subst .ipynb,.sh,$(NOTEBOOKS)),../scripts/$(nb))
 
-all: norm shell
+all:: norm 
 
 norm:
 	$(NORMALIZE) $(NORMALIZE_OPTIONS) $(NOTEBOOKS)
 
+all:: shell
+
+SHELLS = $(foreach nb,$(subst .ipynb,.sh,$(NOTEBOOKS)),../scripts/$(nb))
 shell: $(SHELLS)
 
 ../scripts/%.sh: %.ipynb
@@ -49,18 +51,9 @@ shell: $(SHELLS)
 # live slideshows, seems to be html
 
 
-export: exec exported-media
+all:: exec
 
-.PHONY: export exported-media
-
-####
-exporting:
-	mkdir exporting
-
-exported-media: 
-	mkdir -p exporting/media
-	(cd ../media; rsync -ai $$(git ls-files) ../notebooks/exporting/media/)
-
+.PHONY: exec
 
 #### exec notebooks
 EXECS=$(foreach nb,$(NOTEBOOKS),exporting/$(subst .ipynb,.exec.ipynb,$(nb)))
@@ -69,21 +62,21 @@ exporting/%.exec.ipynb: %.ipynb
 	jupyter nbconvert --to notebook --execute $*.ipynb --output exporting/$*.exec.ipynb
 	$(LICENCE_STRIP) $@
 
-exec: exporting $(EXECS)
+exec: $(EXECS)
 
 
 
-#### bundle
+#### sphinx
 
 .PHONY: sphinx view-sphinx
 
-sphinx: exporting/build/html/index.html
+sphinx: exporting/_build/html/index.html
 
-exporting/build/html/index.html: exporting/index.rst exporting/conf.py $(EXECS) 
-	sphinx-build -b html exporting exporting/build/html
+exporting/_build/html/index.html: exporting/index.rst exporting/conf.py $(EXECS) 
+	sphinx-build -b html exporting exporting/_build/html
 
 view-sphinx:
-	open exporting/build/html/index.html
+	open exporting/_build/html/index.html
 
 ### 
 # markdown would be nice too, at least for creating a single bundled document
@@ -92,7 +85,7 @@ view-sphinx:
 # so let's forget about that for now
 
 clean:
-	rm -rf exporting/build
+	rm -rf exporting/_build
 
 superclean: clean
 	rm -rf exporting/*.ipynb
