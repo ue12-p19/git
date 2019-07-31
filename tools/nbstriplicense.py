@@ -10,7 +10,7 @@ assert IPython.version_info[0] >= 4
 
 import nbformat
 
-default_license = 'license CC BY-NC-ND'
+default_license = 'Licence CC BY-NC-ND'
 
 
 def xpath(top, path):
@@ -125,7 +125,7 @@ class Notebook:
     def full_monty(self, license):
         self.parse()
         self.remove_license_cells(license)
-        self.compute_plan()
+        #self.compute_plan()
         self.save()
 
 
@@ -148,7 +148,7 @@ def main():
         help="if a cell contains that text, it gets deleted")
     parser.add_argument(
         "-v", "--verbose", dest="verbose", action="store_true", default=False,
-        help="show current notebookname")
+        help="be verbose")
     parser.add_argument(
         "notebooks", metavar="IPYNBS", nargs="*",
         help="the notebooks to normalize")

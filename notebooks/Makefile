@@ -12,15 +12,15 @@ NORMALIZE = ../../flotpython-tools/tools/nbnorm.py
 NORMALIZE_OPTIONS = --author "Thierry Parmentelat" --logo-path media/inria-25-alpha.png --rise
 LICENCE_STRIP = ../tools/nbstriplicense.py
 
+# using ipypublish instead of sphinx-build
 # nbpublish insists on getting an absolute path for output path
-ABSEXPORT = $(shell pwd)/exporting
-
+#ABSEXPORT = $(shell pwd)/exporting
 # by default
-HTMLSTYLE = html_ipypublish_all 
+#HTMLSTYLE = html_ipypublish_all 
 # static reveal slides
-SLIDESSTYLE = slides_ipypublish_all
+#SLIDESSTYLE = slides_ipypublish_all
 # sphinx output comes with a toc but figures are broken
-SPHINXSTYLE = sphinx_ipypublish_all.run
+#SPHINXSTYLE = sphinx_ipypublish_all.run
 
 
 
@@ -38,10 +38,6 @@ shell: $(SHELLS)
 ../scripts/%.sh: %.ipynb
 	jupyter nbconvert --to script $* && mv -f $*.sh ../scripts && chmod +x ../scripts/$*.sh
 
-####
-plan:
-	egrep '"#{1,2} ' $(NOTEBOOKS) > PLAN.grep
-
 #########################################################################
 # execution / conversion / publication
 # 
@@ -53,76 +49,39 @@ plan:
 # live slideshows, seems to be html
 
 
-export: exec html media
+export: exec exported-media
 
-.PHONY: export exec html media
+.PHONY: export exported-media
 
 ####
 exporting:
 	mkdir exporting
 
-media: 
+exported-media: 
 	mkdir -p exporting/media
 	(cd ../media; rsync -ai $$(git ls-files) ../notebooks/exporting/media/)
 
 
-####
+#### exec notebooks
 EXECS=$(foreach nb,$(NOTEBOOKS),exporting/$(subst .ipynb,.exec.ipynb,$(nb)))
 
 exporting/%.exec.ipynb: %.ipynb
 	jupyter nbconvert --to notebook --execute $*.ipynb --output exporting/$*.exec.ipynb
+	$(LICENCE_STRIP) $@
 
 exec: exporting $(EXECS)
 
 
 
-####
-HTMLS=$(foreach nb,$(NOTEBOOKS),exporting/$(subst .ipynb,.exec.html,$(nb)))
-
-exporting/%.exec.html:%.ipynb 
-	nbpublish -f $(HTMLSTYLE) -o $(ABSEXPORT) exporting/$*.exec.ipynb
-	rm exporting/*.log
-
-html: exporting $(HTMLS)
-
-
-
 #### bundle
 
-.PHONY: bundle slides sphinx
+.PHONY: sphinx
 
-bundle: exporting/ALL.html
-slides: exporting/SLIDES.html
+sphinx: exporting/build/html/index.html
 
-exporting/ALL.ipynb: $(EXECS)
-	nbmerge exporting/[0-9]*.exec.ipynb > $@
+exporting/build/html/index.html: $(EXECS)
+	sphinx-build -b html exporting exporting/build/html
 
-exporting/ALL.html: exporting/ALL.ipynb
-	nbpublish -f $(HTMLSTYLE) -o $(ABSEXPORT) exporting/ALL.ipynb
-	rm exporting/*.log
-
-# static reveal slides
-exporting/SLIDES.ipynb: exporting/ALL.ipynb
-	cp exporting/ALL.ipynb $@
-	$(LICENCE_STRIP) $@
-
-exporting/SLIDES.html: exporting/SLIDES.ipynb
-	nbpublish -f $(SLIDESSTYLE) -o $(ABSEXPORT) exporting/SLIDES.ipynb
-	mv -f exporting/SLIDES.slides.html $@
-	rm exporting/*.log
-
-
-
-# this one has the same figure all over the document
-sphinx: exporting/ALL-sphinx.html
-
-exporting/ALL-sphinx.html: exporting/ALL.ipynb
-	nbpublish -f $(SPHINXSTYLE) -o $(ABSEXPORT) exporting/ALL.ipynb
-	mv -f exporting/ALL.html $@
-	rm exporting/*.log
-
-foo:
-	nbpublish -f $(SPHINXSTYLE) -o $(ABSEXPORT) exporting/[0-9]*.ipynb
 
 ### 
 # markdown would be nice too, at least for creating a single bundled document
@@ -131,7 +90,8 @@ foo:
 # so let's forget about that for now
 
 clean:
-	rm -rf exporting/*.html exporting/ALL*
+	rm -rf exporting/build
 
-superclean:
-	rm -rf exporting
+superclean: clean
+	rm -rf exporting/*.ipynb
+
