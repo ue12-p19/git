@@ -15,7 +15,7 @@ Index
    2-02-my-first-changes.exec
    2-03-my-first-branch.exec
    2-04-kinds-of-merge.exec
-   2-05-scanning-and-branches.exec
+   2-05-order-reachable.exec
    2-06-my-first-remote.exec
    3-01-stash.exec
 
