@@ -12,12 +12,16 @@ Index
    1-02-intro-ecosysteme.exec
    1-03-notebooks-bash.exec
    2-01-my-first-repo.exec
-   2-02-my-first-changes.exec
+   2-02-consistency-repo-fs.exec
    2-03-my-first-branch.exec
    2-04-kinds-of-merge.exec
    2-05-order-reachable.exec
    2-06-my-first-remote.exec
-   3-01-stash.exec
+   3-01-managing-changes.exec
+   3-02-glitches-and-stash.exec
+   3-03-rebase.exec
+   3-04-social-additions.exec
+   3-05-implementation.exec
 
 Licence CC BY-NC-ND - Thierry Parmentelat - Inria 
 

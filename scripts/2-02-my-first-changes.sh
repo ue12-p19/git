@@ -142,3 +142,5 @@ git reset -- README.md
 git checkout -- README.md
 
 show-diffs
+
+git l --all

@@ -122,3 +122,5 @@ git branch -D bookmark
 git merge $ghost
 
 git l
+
+git l --all

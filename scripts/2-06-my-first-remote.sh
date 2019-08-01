@@ -315,3 +315,5 @@ cd $TOP/repo-alice
 git pull github devel
 
 git l
+
+git l --all

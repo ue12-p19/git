@@ -187,3 +187,5 @@ git l HEAD^
 
 # et ainsi de suite
 git log --oneline HEAD^^
+
+git l --all

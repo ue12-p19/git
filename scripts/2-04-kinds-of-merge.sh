@@ -12,7 +12,7 @@ reset=""
 if [ -n "$reset" ]; then 
     cd $TOP
     bash $SCRIPTS/2-01-my-first-repo.sh
-    bash $SCRIPTS/2-02-my-first-changes.sh
+    bash $SCRIPTS/2-02-consistency-repo-fs.sh
     bash $SCRIPTS/2-03-my-first-branch.sh
 fi >& /dev/null
 
@@ -94,3 +94,5 @@ git l --all
 
 git diff devel master
 
+
+git l --all
