@@ -13,7 +13,7 @@ if [ -n "$reset" ]; then
     cd $TOP
     bash $SCRIPTS/2-01-my-first-repo.sh
     bash $SCRIPTS/2-02-consistency-repo-fs.sh
-    bash $SCRIPTS/2-03-my-first-branch.sh
+    bash $SCRIPTS/2-03-my-first-merge.sh
     bash $SCRIPTS/2-04-kinds-of-merge.sh
 fi >& /dev/null
 

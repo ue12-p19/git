@@ -13,7 +13,7 @@ Index
    1-03-notebooks-bash.exec
    2-01-my-first-repo.exec
    2-02-consistency-repo-fs.exec
-   2-03-my-first-branch.exec
+   2-03-my-first-merge.exec
    2-04-kinds-of-merge.exec
    2-05-order-reachable.exec
    2-06-my-first-remote.exec
