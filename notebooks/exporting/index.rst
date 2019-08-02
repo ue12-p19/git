@@ -19,7 +19,7 @@ Index
    2-06-my-first-remote.exec
    3-01-managing-changes.exec
    3-02-glitches-and-stash.exec
-   3-03-rebase.exec
+   3-03-rewrite-history.exec
    3-04-social-additions.exec
    3-05-implementation.exec
 
