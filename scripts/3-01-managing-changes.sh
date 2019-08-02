@@ -1,41 +1,4 @@
 
-# ce sera toujours notre façon de commencer
-[ -f scripts/helpers.sh ] && source scripts/helpers.sh
-
-# si nécessaire, vous pouvez remettre le repository 
-# dans l'état où il est après le notebook 10-my-first-repo
-# 
-# pour cela mettez "true" au lieu de ""
-# et bien sûr évaluer la cellule
-
-reset=""
-
-if [ -n "$reset" ]; then 
-    cd $TOP
-    bash $SCRIPTS/2-01-my-first-repo.sh 
-fi >& /dev/null
-
-# si nécessaire, on se place dans le repo git
-[ -d my-first-repo ] && cd my-first-repo
-
-pwd
-
-# vous devez avoir 4 commits
-git l
-
-# souvenez-vous que HEAD^^ signifie désigne le commit
-# qui est le grand-père de HEAD
-
-git checkout -b devel HEAD^^
-
-git l
-
-git l --all
-
-# quand on change de branche
-# les fichiers sur le disque changent aussi !
-ls
-
 # de très nombreuses options disponibles
 # sans --all
 git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
@@ -142,5 +105,3 @@ git reset -- README.md
 git checkout -- README.md
 
 show-diffs
-
-git l --all
