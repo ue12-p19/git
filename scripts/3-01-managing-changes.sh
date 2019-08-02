@@ -1,4 +1,39 @@
 
+# ce sera toujours notre façon de commencer
+[ -f scripts/helpers.sh ] && source scripts/helpers.sh
+
+# si nécessaire, vous pouvez remettre le repository en l'état
+# 
+# pour cela mettez "true" au lieu de ""
+# et bien sûr évaluer la cellule
+
+reset=""
+
+if [ -n "$reset" ]; then 
+    cd $TOP
+    bash $SCRIPTS/2-06-my-first-remote.sh
+fi >& /dev/null
+
+# si nécessaire, on se place dans le repo git
+[ -d repo-alice ] && cd repo-alice
+
+pwd
+
+# nous sommes dans 'repo-alice' qui a 5 commits
+
+git l
+
+# et pour être sûr on vérifie aussi 
+# qu'il n'y a pas de différence entre
+# le commit et les fichiers
+# on doit voir 'working tree clean'
+
+git status
+
+# juste pour alléger l'affichage, on se crée un commit
+# avec un libellé plus court
+git commit --allow-empty --message="modifications pendantes"
+
 # de très nombreuses options disponibles
 # sans --all
 git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
@@ -65,8 +100,6 @@ git reset --hard
 git status
 
 show-diffs
-
-ls
 
 git reset --hard
 $SCRIPTS/do both-kinds-of-changes
