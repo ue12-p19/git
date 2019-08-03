@@ -133,4 +133,36 @@ function commit-bob() {
     git commit -m 'contribution Bob dans LICENSE'
 }
 
+# initialize repo-rebase
+function rebase-init() {
+    git init
+    for i in $(seq 20); do
+        printf "%02d\n" $i
+    done > FILE
+    git add FILE
+    git commit -m A 
+}
+
+function rebase-master-branch() {
+    sed -i.patched -e "s/02/02 commit B/" FILE
+    git add FILE
+    git commit -m B
+    sed -i.patched -e "s/04/04 commit C/" FILE
+    git add FILE
+    git commit -m OOPS
+}
+
+function rebase-devel-branch() {
+    git checkout -b devel HEAD^^
+    sed -i.patched -e "s/06/06 commit D/" FILE
+    git add FILE
+    git commit -m D
+    sed -i.patched -e "s/08/08 commit E/" FILE
+    git add FILE
+    git commit -m E
+    git checkout master
+}
+
+
+# do init-rebase -> appelle init-rebase
 "$@"
