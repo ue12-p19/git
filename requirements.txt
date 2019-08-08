@@ -8,4 +8,3 @@ nbdime
 nbmerge
 jupyter-contrib-nbextensions
 ipywidgets
--r notebooks/exporting/requirements.txt
