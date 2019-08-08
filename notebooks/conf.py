@@ -20,7 +20,7 @@ exclude_patterns = ['_build', 'build', '**.ipynb_checkpoints']
 
 extensions = ['ipypublish.sphinx.notebook', 'ipypublish.sphinx.gls', 'sphinx.ext.mathjax', 'sphinxcontrib.bibtex', 'sphinx.ext.todo']
 
-ipysphinx_export_config = 'sphinx_ipypublish_all.ext.noexec'
+ipysphinx_export_config = 'sphinx_ipypublish_all.ext'
 ipysphinx_show_prompts = True
 ipysphinx_input_prompt = 'In:'
 ipysphinx_output_prompt = 'Out:'

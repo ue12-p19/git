@@ -1,2 +1,9 @@
+# this file is primarily for readthedocs.io
 ipypublish[sphinx]
 sphinx-rtd-theme
+jupyter_client
+ipykernel
+ipythontutor
+nbautoeval
+ipywidgets
+calysto_bash
