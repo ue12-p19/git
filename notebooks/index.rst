@@ -6,7 +6,7 @@ Index
    :includehidden:
    :maxdepth: 2
    :numbered:
-   :caption: Table of Contents:
+   :caption: Sommaire:
 
    1-01-summary-video
    1-02-intro-ecosysteme
