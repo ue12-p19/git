@@ -20,7 +20,18 @@ exclude_patterns = ['_build', 'build', '**.ipynb_checkpoints']
 
 extensions = ['ipypublish.sphinx.notebook', 'ipypublish.sphinx.gls', 'sphinx.ext.mathjax', 'sphinxcontrib.bibtex', 'sphinx.ext.todo']
 
-ipysphinx_export_config = 'sphinx_ipypublish_all.ext'
+### where to find our custom material
+# conf file itself
+ipysphinx_config_folders = tuple(['.'])
+# preprocessor module
+import sys
+sys.path.append('.')
+
+
+# this is the config that ships with ipypublish
+# ipysphinx_export_config = 'sphinx_ipypublish_all.ext'
+# we added our own notes-outliner preprocessor
+ipysphinx_export_config = 'sphinx_ipypublish_all.ext.custom'
 ipysphinx_show_prompts = True
 ipysphinx_input_prompt = 'In:'
 ipysphinx_output_prompt = 'Out:'
