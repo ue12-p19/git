@@ -48,3 +48,8 @@ view-sphinx:
 
 clean:
 	rm -rf _build
+
+# manually run nbpublish on one notebook for debugging
+# WARNING: this does not always seem to output the expected .rst in converted/ 
+convert:
+	for notebook in $(NOTEBOOKS); do PYTHONPATH=. nbpublish -ep . -f sphinx_ipypublish_all.ext.custom $$notebook; done
