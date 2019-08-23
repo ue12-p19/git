@@ -18,12 +18,13 @@ def tracks(coursedir):
     # 'approfondissement' : 3*
 
     track_specs = [
-        ('intro' , 'niveau élémentaire', 
-         [ ('survol', '1-*.ipynb'),
+        ('Session 1' , 'utilisation en local', 
+         [ ('intro', '1-*.ipynb'),
            ('primer', '2-*.ipynb'),
          ]),
-        ('approfondissement', 'niveau intermédiaire',
-         [ ('avancé', '3-*.ipynb'),
+        ('Session 2', 'synchros et fonctions avancées',
+         [ ('synchros', '3-*.ipynb'),
+           ('avancé', '4-*.ipynb'),
          ]),
         ]
 
