@@ -14,3 +14,7 @@ RUN pip install calysto_bash
 # these 2 are also available, but less responsive 
 #RUN pip install bash_kernel && python -m bash_kernel.install
 #RUN pip install metakernel_bash && python -m metakernel_bash install
+
+
+### speed up jupyter lab startup
+RUN jupyter lab build
