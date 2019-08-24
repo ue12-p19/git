@@ -8,9 +8,9 @@
 #     pip install nbmerge
 
 
-NORMALIZE = ../../flotpython-tools/tools/nbnorm.py
+NORMALIZE = ../flotpython-tools/tools/nbnorm.py
 NORMALIZE_OPTIONS = --author "Thierry Parmentelat" --logo-path media/inria-25-alpha.png --rise
-LICENCE_STRIP = ../../flotpython-gittutorial/tools/nbstriplicense.py
+LICENCE_STRIP = ../tools/nbstriplicense.py
 
 
 NOTEBOOKS := $(shell git ls-files *.ipynb)

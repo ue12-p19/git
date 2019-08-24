@@ -1,0 +1,3 @@
+[submodule "flotpython-tools"]
+	path = flotpython-tools
+	url = git@github.com:flotpython/tools.git
