@@ -8,7 +8,7 @@ Index
    :numbered:
    :caption: Sommaire:
 
-   1-01-introduction
+   1-01-introduction-video
    1-02-architecture
    1-03-notebooks-bash
    2-01-my-first-repo
