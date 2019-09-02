@@ -20,10 +20,10 @@ def tracks(coursedir):
     track_specs = [
         ('Session 1' , 'utilisation en local', 
          [ ('intro', '1-*.ipynb'),
-           ('primer', '2-*.ipynb'),
+           ('git en local', '2-*.ipynb'),
          ]),
         ('Session 2', 'synchros et fonctions avancées',
-         [ ('synchros', '3-*.ipynb'),
+         [ ('git distribué', '3-*.ipynb'),
            ('avancé', '4-*.ipynb'),
          ]),
         ]
