@@ -9,7 +9,7 @@
 
 
 NORMALIZE = ../flotpython-tools/tools/nbnorm.py
-NORMALIZE_OPTIONS = --author "Thierry Parmentelat" --logo-path media/inria-25-alpha.png --rise
+NORMALIZE_OPTIONS = --author "Thierry Parmentelat" --logo-path ../media/inria-25-alpha.png --rise
 LICENCE_STRIP = ../tools/nbstriplicense.py
 
 
