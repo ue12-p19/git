@@ -22,10 +22,10 @@ def tracks(coursedir):
          [ ('intro', '1-*.ipynb'),
            ('git en local', '2-*.ipynb'),
          ]),
-#        ('Session 2', 'synchros et fonctions avancées',
-#         [ ('git distribué', '3-*.ipynb'),
+        ('Session 2', 'synchros et fonctions avancées',
+         [ ('git distribué', '3-*.ipynb'),
 #           ('avancé', '4-*.ipynb'),
-#         ]),
+         ]),
         ]
 
     return [Track(coursedir, 

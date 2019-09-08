@@ -16,6 +16,9 @@ Index
    2-03-my-first-merge
    2-04-kinds-of-merge
    2-05-order-reachable
+   3-01-my-first-remote
+   3-02-push-syndrom
+   3-03-social-additions
 
 Licence CC BY-NC-ND - Thierry Parmentelat - Inria 
 
