@@ -15,7 +15,7 @@ if [ -n "$reset" ]; then
     bash $SCRIPTS/2-01-my-first-repo.sh 
 fi >& /dev/null
 
-# si nécessaire, on se place dans le repo git
+# si nécessaire, on se place dans le dépôt git
 [ -d my-first-repo ] && cd my-first-repo
 
 pwd
@@ -26,7 +26,6 @@ git l
 # souvenez-vous que HEAD^^ 
 # désigne le commit
 # qui est le grand-père de HEAD
-# donc l'avant-dernier
 
 git checkout -b devel HEAD^^
 

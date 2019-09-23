@@ -5,6 +5,11 @@
 # en particulier pour savoir la version de `git` qui est installée
 git version
 
+# les détails techniques de cette cellule ne sont pas importants
+# c'est simplement pour permettre de recommencer à zéro 
+
+# cd veut dire 'change directory'
+# on se met dans le répertoire des notebooks
 cd $TOP
 
 # pour pouvoir recommencer le scénario depuis le début
@@ -31,7 +36,8 @@ ls -aF
 # on voit un répertoire vide
 ls 
 
-# git log se plaint, c'est normal 
+# git log permet de lister les commits
+# il se plaint, c'est normal 
 # car on n'a encore créé aucun commit
 git log
 
@@ -51,6 +57,9 @@ git add README.md
 # notre différence est maintenant montrée en vert
 git status
 
+# en pratique vous pouvez faire simplement 
+# git commit
+# et écrire le commentaire avec un éditeur de texte
 git commit -m 'my first commit: added README.md'
 
 # pour l'instant on n'en a qu'un
@@ -64,14 +73,14 @@ git log
 # on reparlera de git log tout à l'heure
 git log --oneline
 
-# lorsque le fichier ne fait qu'une seule ligne, pas besoin de EOF
 $SCRIPTS/do create-license
 
 # voici le contenu du fichier LICENSE
 cat LICENSE
 
-# comme on veut que ce nouveau fichier 
-# fasse partie du deuxième commit, on l'ajoute
+# comme on veut que ce nouveau 
+# fichier fasse partie du deuxième 
+# commit, on l'ajoute
 git add LICENSE
 
 # voilà ce que nous montre alors "git status"
@@ -90,8 +99,10 @@ git status
 
 git diff
 
-# c'est bien ce que je voulais faire
-# donc je peux ajouter tout le fichier 
+# c'est bien ce que 
+# je voulais faire
+# donc je peux ajouter
+# tout le fichier 
 git add README.md
 
 # regardons à nouveau git status
@@ -116,8 +127,7 @@ git l
 
 # pour voir la documentation complète
 # de git log (attention très très long !)
-# enlever le commentaire en début de ligne:
-
+# tapez 
 # git log --help
 
 git l
@@ -159,10 +169,11 @@ echo 'commit #4' >> README.md
 
 # ici git status me montre que j'ai 
 # (*) le fichier README.md modifié 
-# (*) le fichier file2 qui n'est pas dans le repo
+# (*) le fichier factorial.md
+#     qui n'est pas dans le dépôt
 git status
 
-# si j'ajoute les deux fichiers file1 et file3
+# si j'ajoute les deux fichiers README.md et factorial.md
 # je prépare un commit qui contient 
 # tout ce qu'il y a dans mon répertoire de travail
 git add README.md factorial.md
@@ -173,10 +184,6 @@ git status
 git commit -m "adding markdown, we now have 4 files"
 
 git l
-
-ls -l
-
-git ls-tree HEAD
 
 # par exemple si je parcours les commits en partant de HEAD
 # j'en vois donc 4

@@ -17,12 +17,13 @@ if [ -n "$reset" ]; then
     bash $SCRIPTS/2-04-kinds-of-merge.sh
 fi >& /dev/null
 
-# si nécessaire, on se place dans le repo git
+# si nécessaire, on se place dans le dépôt git
 [ -d my-first-repo ] && cd my-first-repo
 
 pwd
 
-# vous devez avoir 9 commits
+# ceci compte les commits
+# vous devez en avoir 9 
 git log --oneline | wc -l
 
 
@@ -32,7 +33,8 @@ git log -1 --format="%s"
 # et la branche courante est master
 git branch
 
-# le point de départ par défaut est HEAD
+# le point de départ 
+# par défaut est HEAD
 
 git l
 
@@ -64,6 +66,8 @@ git l
 git l --all
 
 # en précisant le hash
+# je peux toujours accéder au
+# commit 'conflit résolu'
 git l $ghost
 
 # on est toujours dans master

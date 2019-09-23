@@ -4,7 +4,7 @@
 
 cd $TOP
 
-# on recommence un autre repo plus simple; à nouveau
+# on recommence un autre dépôt plus simple; à nouveau
 # je nettoie complètement ce qu'on a pu faire précédemment
 if [ -d repo-alice ]; then
     echo "on repart d'un directory vide"
@@ -14,17 +14,13 @@ fi
 # on le crée
 mkdir repo-alice
 
-# on va dedans
-cd repo-alice
+# on se place dans ce répertoire dépôt git
+cd $TOP/repo-alice
 
-# si nécessaire, on se place dans le repo git
-[ -d repo-alice ] && cd repo-alice
+pwd 
 
-pwd
-
+# on remplit un peu avec deux commits
 $SCRIPTS/do populate-repo-alice
-
-git l
 
 # vous devez avoir 2 commits
 git l
@@ -35,27 +31,36 @@ git l
 git branch
 
 # on utilisera ce répertoire $TOP/repo-cloned
-# pour simuler un deuxième repo
+# pour simuler un deuxième dépôt
+# pour l'instant on le supprime
 # 
-# on verra plus tard qu'en pratique deux personnes
-# qui travaillent ensemble passent par un troisième 
-# repo sur github, mais pour l'instant on veut 
-# seulement bien illustrer les fonctions `fetch` et `pull` 
-
 if [ -d $TOP/repo-cloned ]; then
     rm -rf $TOP/repo-cloned
 fi
 
 cd $TOP
 
-git clone repo-alice/.git repo-cloned
+# idem, en pratique on peut remplacer 'repo-alice'
+# par une URL sur github
 
-cd $TOP/repo-cloned
+git clone repo-alice repo-cloned
 
+cd $TOP/repo-alice
+git l
+echo ============
 ls
 
+cd $TOP/repo-cloned
+git l
+echo ============
+ls
+
+# le clone est 'propre', 
+# aucun changement pendant
 git status
 
+# on se trouve sur le même commit
+# que repo-alice
 git l
 
 cd $TOP/repo-alice
@@ -70,81 +75,96 @@ pwd
 # pour lister les remotes connus
 git remote
 
-# en version bavarde on voit à quoi correspond le remote 
-git remote -v
+# pour savoir à quoi - à quelle URL - correspond le remote
 
-# depuis le clone, on voit un nouveau type 
-# de référence, comme par exemple origin/master
+git config remote.origin.url
 
+# depuis le clone, 
+pwd
+
+# on voit un nouveau type de référence
+# comme par exemple origin/master
 git l --all
 
 cd $TOP/repo-alice
-
-git l
-
-
 $SCRIPTS/do first-commit-in-alice
 
+# on a maintenant un commit de plus du coté d'alice
 git l
 
+# résumons l'état des deux cotés 
+# à ce stade
+# avant de faire le fetch
+
+# 3 commits chez alice
 cd $TOP/repo-alice
 git l
 
+# repo-cloned n'a aucune
+# idée à ce stade qu'il y a 
+# du nouveau chez alice
+
+# 2 commits dans le clone
 cd $TOP/repo-cloned
 git l
 
-# je retourne sur le clone
+# toujours sur le clone
 cd $TOP/repo-cloned
 
-# on va chercher les commits nouveaux
-# en faisant --all on va sur tous les remote connus
-# ici on n'en a qu'un, c'est origin = initial
+# on va chercher avec fetch les commits nouveaux
+# si on voulait on pourrait faire 
+# git fetch origin
+
+# mais en faisant --all on va sur tous les remote connus
+# c'est l'utilisation habituelle 
+# de toutes façons ici on n'en a qu'un
+# c'est origin = repo-alice
+# donc les deux formes reviennent au même
+
 git fetch --all
 
-# le repo initial
+# le dépôt initial
 
+# on a toujours 3 commits bien sûr
 cd $TOP/repo-alice
 git l
 
-# le repo après fetch
+# le clone après fetch
 cd $TOP/repo-cloned
 
-# si je ne précise pas --all
-# on part comme toujours de HEAD
-git l 
+# je précise bien --all
+# car sinon je ne verrais que les commits
+# atteignables depuis la branche courante 'devel'
 
-# mais si j'ajoute --all:
-
+# on voit maintenant 3 commits
 git l --all
+
+# la branche courante est devel
 
 git merge origin/devel
 
+# maintenant repo-cloned est parfaitement à jour 
+# avec repo-alice
 git l
-
-# git config permet de lire
-# un attribut dans la config
-
-# ceci est le défaut pour le
-# premier argument à git pull
-git config branch.devel.remote
-
-# pareil pour le deuxième argument
-
-git config branch.devel.merge
 
 cd $TOP
 rm -rf repo-cloned fake-github.git
+
+# avec l'option --bare on crée un dépôt bare
+# comme il le serait sur github
 git clone --bare repo-alice fake-github.git
 
 cd $TOP
 
-# le contenu d'un repo bare
+# le contenu d'un dépôt bare
 ls fake-github.git
 
 # est proche du contenu d'un .git
-# dans un repo 'normal'
+# dans un dépôt 'normal'
 
 ls repo-alice/.git
+
+# créons un commit chez alice
 
 cd $TOP/repo-alice
 
@@ -152,15 +172,21 @@ $SCRIPTS/do commit-in-initial-for-simple-push
 
 git l
 
-cd $TOP/fake-github.git
-git l
+# sur le clone bien sûr 
+# le nouveau commit est absent
 
-# on avait bien créé un remote plus haut mais
-# c'était dans `repo-bob`
+cd $TOP/fake-github.git
+
+git l
 
 cd $TOP/repo-alice
 
-# mais ici dans repo-alice on ne connait aucun remote
+# on avait bien un remote dans le scénario précédent
+# mais c'était dans repo-cloned 
+# le remote avait alors été créé par 'git clone' 
+# 
+# ici dans repo-alice on ne connait aucun remote
+ 
 git remote
 
 # il va donc nous falloir définir un remote à la main
@@ -169,7 +195,11 @@ git remote
 
 git remote add github $TOP/fake-github.git
 
-git remote -v
+# maintenant on connait un remote
+git remote
+
+# qui est un raccourci pour désigner le dépôt qui se situe ici
+git config remote.github.url
 
 # la situation dans initial
 # on a 4 commits
@@ -185,7 +215,7 @@ cd $TOP/fake-github.git
 
 git l --all
 
-# on se met dans le repo initial
+# on se met dans le dépôt initial
 
 cd $TOP/repo-alice
 
@@ -196,8 +226,8 @@ cd $TOP/repo-alice
 
 
 # cela dit je recommande par sécurité 
-# d'éviter toute ambiüité 
-# et de faire explicitement
+# et pour éviter toute ambigüité 
+# de faire explicitement
 #
 git push github devel:devel
 
@@ -219,101 +249,3 @@ git l
 
 cd $TOP/fake-github.git
 git l 
-
-# on repart d'un repo tout simple avec seulement deux commits 
-# pour ne pas encombrer inutilement l'affichage
-
-# on nettoie
-cd $TOP
-rm -rf repo-alice fake-github.git repo-bob
-
-# recrée repo-alice avec deux commits
-cd $TOP
-mkdir repo-alice
-cd repo-alice
-$SCRIPTS/do populate-repo-alice > /dev/null
-
-# on crée un repo bare qui remplace github
-# pour faire le proxy entre les deux acteurs
-cd $TOP
-git clone --bare repo-alice fake-github.git
-
-# on clone le faux github dans repo-bob
-cd $TOP
-git clone fake-github.git repo-bob
-
-cd $TOP/repo-alice
-git l
-
-cd $TOP/fake-github.git
-git l
-
-cd $TOP/repo-bob
-git l
-
-# alice avance de son coté
-
-cd $TOP/repo-alice
-$SCRIPTS/do commit-alice
-
-git l
-
-# bob aussi
-
-cd $TOP/repo-bob
-$SCRIPTS/do commit-bob
-
-git l
-
-cd $TOP/repo-alice
-git remote add github $TOP/fake-github.git
-git remote
-
-cd $TOP/repo-bob
-git remote add github $TOP/fake-github.git
-git remote
-
-cd $TOP/repo-alice
-
-git push github devel:devel 
-
-git l
-
-cd $TOP/fake-github.git
-git l
-
-# si bob essaie de pousser à ce stade, c'est refusé
-# car le merge, qui n'est pas fast-forward, impliquerait
-# la création d'un nouveau commit, ce qui
-# est risqué à distance 
-#
-# notez bien qu'ici les deux modifications de alice et bob
-# sont indépendantes et peuvent être mergées sans conflit !
-
-cd $TOP/repo-bob
-git push github devel
-
-# pour s'en sortir il suffit que Bob commence par tirer
-# et c'est en tirant qu'on va créer le commit qui merge les deux travaux
-# 
-# pour des raisons sordides liées au fait qu'on est dans un notebook
-# je lui passe l'option --no-edit
-
-cd $TOP/repo-bob
-git pull --no-edit github devel 
-
-git l
-
-cd $TOP/repo-bob
-git push github devel
-
-
-git l
-
-# et alice peut tirer
-cd $TOP/repo-alice
-git pull github devel
-
-git l
-
-git l --all

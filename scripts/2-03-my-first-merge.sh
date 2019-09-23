@@ -15,7 +15,7 @@ if [ -n "$reset" ]; then
     bash $SCRIPTS/2-02-consistency-repo-fs.sh 
 fi >& /dev/null
 
-# si nécessaire, on se place dans le repo git
+# si nécessaire, on se place dans le dépôt git
 [ -d my-first-repo ] && cd my-first-repo
 
 pwd
@@ -32,16 +32,19 @@ echo "dans la branche devel" >> LICENSE
 git add LICENSE
 git commit -m "le début de la branche devel"
 
-git l --all
-
+# on est  sur devel
 ls
 
+# on va sur master
 git checkout master
 
+# on retrouve tous nos fichiers
 ls
 
+# on retourne sur devel
 git checkout devel
 
+# les fichiers suivent le contenu du commit
 ls
 
 git diff master devel
@@ -52,13 +55,16 @@ git checkout master
 # on vérifie
 git branch
 
-# ce merge va créer un commit, donc:
+# ce merge va 
+# créer un commit, donc:
 
-# - il sera créé sur la branche courante
+# - il sera créé 
+# sur la branche courante
 # ici master
-# -  il me faut donner un message
-git merge devel -m "mon premier merge"
+# -  il me faut donner
+# un message
 
+git merge devel -m "mon premier merge"
 
 # remarquez le nouveau commit 
 # qui est bien sûr
@@ -70,20 +76,6 @@ git l
 git l -1 master^
 
 git l -1 master~2
-
-git l
-
-git l -1 master^
-
-git l -1 master^2
-
-git l
-
-# première à droite, puis on descend
-git l -1 master^2^
-
-# c'est donc comme si j'était descendu 3 fois
-git l -1 master~3
 
 git l --all
 

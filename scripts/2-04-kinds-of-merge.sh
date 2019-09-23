@@ -16,7 +16,7 @@ if [ -n "$reset" ]; then
     bash $SCRIPTS/2-03-my-first-merge.sh
 fi >& /dev/null
 
-# si nécessaire, on se place dans le repo git
+# si nécessaire, on se place dans le dépôt git
 [ -d my-first-repo ] && cd my-first-repo
 
 pwd
@@ -62,13 +62,25 @@ git add factorial.py factorial.md
 
 git commit -m'pour conflit, dans master'
 
+# la situation juste avant le merge
 git l --all
 
 
 # on est sur master
 git merge devel
 
+# les changements non
+# conflictuels sont dans
+# l'index
+# les conflits se voient
+# dans les fichiers 
+# concernés
+
 git status
+
+# voici comment est
+# annotée la zone 
+# avec conflit
 
 cat factorial.md
 
@@ -77,22 +89,15 @@ $SCRIPTS/do resolve-conflict
 
 cat factorial.md
 
-# pas de changement naturellement
-git status
-
 # maintenant on peut mettre 
 # la résolution du conflit dans l'index
 git add factorial.md
 
-# plus de souci
-git status
-
 # et à présent on peut committer
-git commit -m  'conflit résolu'
+git commit -m 'conflit résolu'
 
-git l --all
+git l --all -3
 
 git diff devel master
-
 
 git l --all

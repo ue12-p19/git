@@ -7,14 +7,14 @@
 # pour cela mettez "true" au lieu de ""
 # et bien sûr évaluer la cellule
 
-reset=""
+reset="true"
 
 if [ -n "$reset" ]; then 
     cd $TOP
-    bash $SCRIPTS/2-06-my-first-remote.sh
+    bash $SCRIPTS/3-01-my-first-remote.sh
 fi >& /dev/null
 
-# si nécessaire, on se place dans le repo git
+# si nécessaire, on se place dans le dépôt git
 [ -d repo-alice ] && cd repo-alice
 
 pwd
@@ -34,18 +34,14 @@ git status
 # avec un libellé plus court
 git commit --allow-empty --message="modifications pendantes"
 
+git l
+
 # de très nombreuses options disponibles
 # sans --all
 git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
 
 # avec --all
 git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-
-# le contenu d'un commit
-git ls-tree --abbrev HEAD
-
-# un autre commit
-git ls-tree --abbrev master
 
 # git status donne une synthèse
 
@@ -84,7 +80,7 @@ git diff --cached
 # un raccourci pour bien montrer 
 # LES DEUX différences:
 # fichiers / index 
-# et
+#   ET
 # index / commit
 
 type show-diffs
@@ -138,3 +134,36 @@ git reset -- README.md
 git checkout -- README.md
 
 show-diffs
+
+# remettons nous dans re-alice
+
+cd $TOP/repo-alice
+git ls-files
+
+git status
+
+# on crée un fichier à ignorer
+mkdir trash
+touch trash/foo
+
+# listons tous les fichiers
+ls -RF
+
+# git status nous signale le fichier foo
+git status
+
+# on crée le fichier . gitignore avec 
+# un seule ligne qui contient 'trash/'
+echo "trash/" > .gitignore
+
+git status
+
+# du coup maintenant on voit .gitignore, parce qu'il n'est pas dans le dépôt
+# on peut soit l'ajouter, ou alors ... l'ignorer
+
+# on ajoute dans .gitignore une deuxième ligne qui contient 
+# .gitignore
+
+echo ".gitignore" >> .gitignore
+
+git status
