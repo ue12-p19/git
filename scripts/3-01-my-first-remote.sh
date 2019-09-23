@@ -249,3 +249,6 @@ git l
 
 cd $TOP/fake-github.git
 git l 
+
+cd $TOP/repo-alice
+git l --all
