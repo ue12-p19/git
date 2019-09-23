@@ -7,7 +7,7 @@
 # pour cela mettez "true" au lieu de ""
 # et bien sûr évaluer la cellule
 
-reset="true"
+reset=""
 
 if [ -n "$reset" ]; then 
     cd $TOP
@@ -19,7 +19,7 @@ fi >& /dev/null
 
 pwd
 
-# nous sommes dans 'repo-alice' qui a 5 commits
+# nous sommes dans 'repo-alice' qui a 4 commits
 
 git l
 
@@ -29,12 +29,6 @@ git l
 # on doit voir 'working tree clean'
 
 git status
-
-# juste pour alléger l'affichage, on se crée un commit
-# avec un libellé plus court
-git commit --allow-empty --message="modifications pendantes"
-
-git l
 
 # de très nombreuses options disponibles
 # sans --all
@@ -98,6 +92,10 @@ git status
 show-diffs
 
 git reset --hard
+
+# refait les deux changements 
+# qu'on avait fait ci-dessus
+
 $SCRIPTS/do both-kinds-of-changes
 
 show-diffs
@@ -136,26 +134,32 @@ git checkout -- README.md
 show-diffs
 
 # remettons nous dans re-alice
+# la liste des fichiers dans le dernier commit
 
 cd $TOP/repo-alice
 git ls-files
 
+# notre dépôt est propre
+
 git status
 
 # on crée un fichier à ignorer
-mkdir trash
-touch trash/foo
+touch un-fichier
 
 # listons tous les fichiers
-ls -RF
+# pour vérifier l'existence de ce 
+# nouveau fichier
+ls 
 
-# git status nous signale le fichier foo
+# git status nous signale que le fichier
+# pourrait être ajouté
 git status
 
 # on crée le fichier . gitignore avec 
-# un seule ligne qui contient 'trash/'
-echo "trash/" > .gitignore
+# une seule ligne qui contient 'un-fichier'
+echo "un-fichier" > .gitignore
 
+# maintenant git status ignore un-fichier
 git status
 
 # du coup maintenant on voit .gitignore, parce qu'il n'est pas dans le dépôt

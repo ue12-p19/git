@@ -19,6 +19,8 @@ Index
    3-01-my-first-remote
    3-02-push-syndrom
    3-03-social-additions
+   3-04-exo-distributed
+   4-01-managing-changes
 
 Licence CC BY-NC-ND - Thierry Parmentelat - Inria 
 
