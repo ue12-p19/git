@@ -24,7 +24,7 @@ def tracks(coursedir):
          ]),
         ('Session 2', 'synchros et fonctions avancées',
          [ ('git distribué', '3-*.ipynb'),
-#           ('avancé', '4-*.ipynb'),
+           ('avancé', '4-*.ipynb'),
          ]),
         ]
 
