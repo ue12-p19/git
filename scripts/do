@@ -164,5 +164,18 @@ function rebase-devel-branch() {
 }
 
 
+function change-factorial-py-beginning() {
+    sed -i.fixed -e '3 i\
+# une modification au début du fichier' factorial.py
+    rm -f *.fixed    
+}
+
+function change-factorial-py-end() {
+    sed -i.fixed -e '$ i\
+# une modification à la fin du fichier' factorial.py
+    rm -f *.fixed    
+}
+
+
 # do init-rebase -> appelle init-rebase
 "$@"

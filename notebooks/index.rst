@@ -21,6 +21,10 @@ Index
    3-03-social-additions
    3-04-exo-distributed
    4-01-managing-changes
+   4-02-glitches-and-stash
+   4-03-rewrite-history
+   4-04-upstream-branches
+   4-05-implementation
 
 Licence CC BY-NC-ND - Thierry Parmentelat - Inria 
 
