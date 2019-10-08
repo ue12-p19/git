@@ -18,3 +18,8 @@ case "$TERM" in
     *)
         ;;
 esac
+
+# in case the git alias has been wiped out
+# because the container was upgraded or any other reason
+
+git config alias.l > /dev/null || git config --global alias.l "log --oneline --graph"
