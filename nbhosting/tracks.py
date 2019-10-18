@@ -27,7 +27,7 @@ def tracks(coursedir):
            ('avancé', '4-*.ipynb'),
          ]),
         ('évaluation', 'évaluation',
-         [ ('évaluation', 'notebooks/6-[0-9]*.ipynb'),
+         [ ('évaluation', '6-[0-9]*.ipynb'),
          ])
         ]
 
