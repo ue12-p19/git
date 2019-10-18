@@ -26,6 +26,9 @@ def tracks(coursedir):
          [ ('git distribué', '3-*.ipynb'),
            ('avancé', '4-*.ipynb'),
          ]),
+        ('évaluation', 'évaluation',
+         [ ('évaluation', 'notebooks/6-[0-9]*.ipynb'),
+         ])
         ]
 
     return [Track(coursedir, 
